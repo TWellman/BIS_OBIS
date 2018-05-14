@@ -22,7 +22,7 @@ dependencies:
 - pandas
 - xarray
 # misc.
-- yaml
+- pyyaml
 - dask
 - pip
 - pip:

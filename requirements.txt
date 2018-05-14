@@ -12,12 +12,11 @@
 # content: evolving obis-only python package environment
 #
 # python dependencies
-python>=3.5
 netCDF4
 numpy
 pandas
 xarray
-yaml
+pyyaml
 dask
 messytables
 fastnumbers
