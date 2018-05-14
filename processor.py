@@ -1,7 +1,8 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[ ]:
+
 
 # %load obis_erddap_validate.py
 # !/usr/local/bin/python3
@@ -44,13 +45,14 @@ import xarray as xr
 import collections
 from itertools import zip_longest
 from zipfile import ZipFile, is_zipfile  
-from contextlib import ExitStack, redirect_stdout 
+from contextlib import ExitStack 
 import dask
 import yaml
 from fastnumbers import fast_float as float_convert
 
 
-# In[2]:
+# In[ ]:
+
 
 # processing options ( ... most of them anyway)
 
@@ -107,7 +109,8 @@ Options
 """ % (sys.argv[0]))
 
 
-# In[3]:
+# In[ ]:
+
 
 #######################################################################
 ##                          program options                          ##
@@ -472,7 +475,8 @@ def default_inputs():
     return commands
 
 
-# In[4]:
+# In[ ]:
+
 
 
 #######################################################################
@@ -503,7 +507,7 @@ def retrieve_source_files(sb, commands):
         sources = {}
         listdir = [f for f in os.listdir(commands['source_data_dir'])                    if f.endswith('.csv')]
         for dfile in listdir:
-            logger.debug("{}{}".format( dfile,' from different request'))
+            logger.debug("{}{}{}".format('Advisory flag - ', dfile,'file from different request'))
         return listdir, sources
             
 
@@ -596,7 +600,8 @@ def retrieve_source_files(sb, commands):
                                                         no_item.append("\t{}{}".format('Unzip attempt failed for item: ', item['id']))
                                                         pass
                                                 else:
-                                                    logger.debug("{}{}".format(                                                         zf.filename, ' ignored - zipped file without .csv extension'))      
+                                                    logger.debug(zf.filename,' ignored - zipped file without .csv extension')       
+                                        # os.remove(zfile)
                                     else:
                                         logger.debug('warning - unzip attempt failed, structure was not recognized')
                                         no_item.append("\t{}{}".format('Unzip attempt failed for item: ', item['id']))
@@ -626,10 +631,10 @@ def retrieve_source_files(sb, commands):
     listdir = [f for f in os.listdir(commands['source_data_dir']) if f.endswith('.csv')]
     for source in source_files:
         if source not in listdir:
-            logger.debug("{}{}{}".format('warning - ', source,' file from request is not in source file directory'))
+            logger.debug('warning - ', source,' file from request is not in source file directory')
     for dfile in listdir:
         if dfile not in source_files:
-            logger.debug("{}{}".format(dfile,' from different request'))
+            logger.debug('Advisory flag - ', dfile,'file from different request')
 
     return listdir, source_files
 
@@ -1682,7 +1687,7 @@ def meta_proc(filename, metadata = {}):
     # ------------------------------------------------
     date_record = []
 
-    logger.debug("\t\t{}".format('Infusing metadata'))
+    logger.debug("{}".format('   Infusing metadata'))
 
     if 'files' in metadata:
         for dfile in metadata['files']:
@@ -1821,7 +1826,8 @@ def dataframe_metadata(ds, global_metadata, vocab_standard, commands,
         ds[label].attrs = var_meta
 
 
-# In[5]:
+# In[ ]:
+
 
 # brute force (ugly) examination of heterogeneous data types
 # examines each dataframe iterator (chunk)
@@ -1917,7 +1923,8 @@ def data_types(dtype_list, dlist, df, df_labels, commands, err_msg = []):
     return dtype_list
 
 
-# In[6]:
+# In[ ]:
+
 
 # Purpose: csv conversion to NetCDF using (Xarray, Dask) method
 #
@@ -2344,7 +2351,7 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                             ds.to_netcdf(fpaths['ncpath'], mode = 'w', 
                                          format = commands['netcdf_type']) 
                         except:
-                                commands['QC_pass'] = False
+                            commands['QC_pass'] = False
                         
                     if commands['QC_pass']: 
                         logger.debug('\t\t{}{}'.                               format('climate-Forcast compliancy (Xarray) - SET TO: ', decodeCF))
@@ -2384,7 +2391,8 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
         
 
 
-# In[7]:
+# In[ ]:
+
 
 # Purpose: initialize/modify default input parameters
 # accepts either commandline options or *yaml file
@@ -2499,7 +2507,7 @@ def arg_overwrite(opts, args, commands):
                 commands['create_netcdf_files'] = False
                 commands['create_datasets_xml'] = True
             elif o in '--help':
-                get_ipython().system(u'usage()')
+                get_ipython().system('usage()')
                 exit(0)
             else:
                 assert False, 'unhandled option'
@@ -2507,7 +2515,8 @@ def arg_overwrite(opts, args, commands):
     return commands
 
 
-# In[8]:
+# In[ ]:
+
 
 #
 # routine to create/clean work directories 
@@ -2545,7 +2554,8 @@ def set_directories(commands):
             os.remove(f)
 
 
-# In[9]:
+# In[ ]:
+
 
 #
 # Routine to activate logger function (default output is to file)
@@ -2553,34 +2563,21 @@ def set_directories(commands):
 #
 # T. Wellman, BCB Group, USGS
 
-# create new message logger (100 level)
-# -------------------------------------
-def add_logger(self, message, *args, **kws):
-    self.log(100, message, *args, **kws)
-
-
-# activate logger with opts
-# -------------------------------  
 def logform(screen, log_level):
     
-    global logger
-    
-    logging.addLevelName(100, 'MESSAGE')
-    logging.Logger.message = add_logger
-    
-    # report log results to file
-    # ----------------------------------
+    # always report log results to file
+    # -----------------------------------
     logging.basicConfig(level=log_level,
                         format= '%(asctime)s.%(msecs)03d %(name)-12s:  %(levelname)-8s %(message)s', 
                         datefmt= '%Y-%m-%d %H:%M:%S',
                         filename='obis_processor.log',
                         filemode='w')         
     logger = logging.getLogger(__name__)
-    logger.setLevel(log_level)
+    logger.setLevel(logging.DEBUG)
     if logger.hasHandlers():
         logger.handlers.clear()
     
-    # option, also report logs to console 
+    # option, report logs to console 
     # -----------------------------------
     if screen:
         console = logging.StreamHandler()
@@ -2590,11 +2587,12 @@ def logform(screen, log_level):
             datefmt= '%Y-%m-%d %H:%M:%S')
         console.setFormatter(formatter)
         console.setLevel(log_level)
-        
-    return
+
+    return logger
 
 
-# In[10]:
+# In[ ]:
+
 
 # setup file paths (per data item)
 # --------------------------------
@@ -2624,7 +2622,8 @@ def setup_fpaths(filename, commands, p_tasks = [], err_msg = []):
         
 
 
-# In[11]:
+# In[ ]:
+
 
 
 #######################################################################
@@ -2636,30 +2635,21 @@ def setup_fpaths(filename, commands, p_tasks = [], err_msg = []):
 # Uses either messytables or dataframe (xarray, dask) approach for processing data files. 
 # Includes process reporting, content filtering, error messages, and ERDDAP datasets.xml file generation.
 
+def processor(**kwargs):
 
-# if applicable, suppress print-to-screen from imported modules
-# -------------------------------------------------------------
-def supress_print(func):
-    def wrapper(*args, **kargs):
-        with open(os.devnull, 'w') as devnull:
-            with redirect_stdout(devnull):
-                func(*args, **kargs)        
-    return wrapper
-
-
-@supress_print
-def run(**kwargs):
-
-    # update commands dictionary, activate logger  
-    # ----------------------------------------------
+    
+    # assemble and update commands dictionary used for processing  
+    # -------------------------------------------------------------
+    
     commands = default_inputs()
+    logger = logform(commands['log_screen'], commands['log_level'])
     for c in kwargs:
         if c in commands:
             commands[c] = kwargs[c]
-    logform(commands['log_screen'], commands['log_level'])
-    logger.message('** Processor activated **')
+        else:
+            logger.debug("\t{}{}".format('Ignoring non-conforming keyword: ', c))
             
-            
+
     # create + clean local directories
     # --------------------------------
     set_directories(commands)
@@ -2671,7 +2661,7 @@ def run(**kwargs):
     listdir, sources = retrieve_source_files(sb, commands)
     
     # for testing purposes only - limit (subset) dataset processing
-    # listdir = listdir[0:5] # first 5 datasets
+    # listdir = listdir[0:10]
     
             
     # optionally retrieve Darwin Core vocabulary definitions
@@ -2748,15 +2738,19 @@ def run(**kwargs):
     # ---------------------------------------------------------------------
     if commands['create_datasets_xml'] :
         write_datasets_xml(commands, "./")
-        logger.debug('   {}'.format('datasets.xml file created'))
-    
-    logger.message("{}\n\n".format('** Processor terminated **'))
+        logger.debug('   {}\n'.format('datasets.xml file created'))
 
 
 # main program
-logform(True, logging.INFO) 
 
-if __name__ == "__main__":
+def main():
+                         
+    global logger
+    
+    # Optionally, read sys.argv to overwrite default inputs
+    #  via command line or *.yml file
+    #  + assemble commands dictionary for processing  
+    # ---------------------------------------------------
     
     opt_fields = [
     'collectionid=', 'sourcedir=', 'erddapdir=', 'serverdir=', 'only_csv', 'only_netcdf',
@@ -2769,22 +2763,23 @@ if __name__ == "__main__":
         opts, args = getopt.getopt(sys.argv[1:], 'fc', opt_fields)
     except getopt.GetoptError as err:
         logger.error(str(err))
-        get_ipython().system(u'usage(); exit(2) ')
-
-    # retrieve processing commands
-    # -----------------------------
+        get_ipython().system('usage(); exit(2) ')
     commands = default_inputs()    
     commands = arg_overwrite(opts, args, commands)
     
-    run(**commands)
+    # processor engine
+    # ---------------------
+    processor(**commands)
     
+    logger.info("{}".format('Complete - terminating processor'))
+                        
+                
+# default logging (console, logging level -overwritten by commands dict)
+logger = logform(True, logging.INFO)  
+
+
     
-    
-    
+if __name__ == "__main__":
+    main()
                          
-
-
-# In[ ]:
-
-
 
