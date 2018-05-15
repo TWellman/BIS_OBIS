@@ -33,6 +33,7 @@ setup(
     author='T. Wellman and J. Long',
     maintainer='USGS BCB-Sciencebase Team',
     maintainer_email='bcb@usgs.gov',
+    data_files=[('', ['PKG_ID.json'])]
     include_package_data=True,
     zip_safe=True,
     platforms='any',
