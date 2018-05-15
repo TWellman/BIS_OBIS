@@ -1,9 +1,0 @@
-LICENSE.txt
-MANIFEST.in
-README.rst
-bis_obis.egg-info/PKG-INFO
-bis_obis.egg-info/SOURCES.txt
-bis_obis.egg-info/dependency_links.txt
-bis_obis.egg-info/top_level.txt
-bis_obis.egg-info/zip-safe
-data/DarwinCore_vocab_2018-03-13T17-03-40Z.json
