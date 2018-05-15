@@ -1,0 +1,11 @@
+LICENSE.txt
+MANIFEST.in
+PKG_ID.json
+README.rst
+bis_obis/__init__.py
+bis_obis/processor.py
+bis_obis.egg-info/PKG-INFO
+bis_obis.egg-info/SOURCES.txt
+bis_obis.egg-info/dependency_links.txt
+bis_obis.egg-info/top_level.txt
+bis_obis.egg-info/zip-safe
