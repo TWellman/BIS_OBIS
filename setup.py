@@ -24,7 +24,7 @@ with open(fpath) as f:
 
 
 setup(
-    name='obis',
+    name='bis_obis',
     version=_pkginfo['version'],
     license='Alpha pre-release',
     description='A set of obis processing functions for Biogeographic Information System projects',
