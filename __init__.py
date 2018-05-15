@@ -31,7 +31,7 @@ del dependency, missing_dependencies, packages_to_test, vf, fpath, json, path
 
 # module level doc-string
 __doc__ = """
-BIS-OBIS - An OBIS processor library for Python,
+obis_processor - An OBIS processor library for Python,
 A slice of the Biogeographic Information System
 =====================================================================
 
