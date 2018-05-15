@@ -1,4 +1,4 @@
 # Include the license file
 include LICENSE.txt
-include data/*.json
-include *.json
+include data/PKG_ID.json
+include PKG_ID.json
