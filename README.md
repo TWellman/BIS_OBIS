@@ -1,2 +1,2 @@
-# obis processor
-An OBIS processor package for NetCDF-ERDDAP configuration
+# PYTHON BIS OBIS processor
+An OBIS processor package for NetCDF-ERDDAP processing and server configuration
