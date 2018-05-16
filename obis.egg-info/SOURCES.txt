@@ -1,9 +1,9 @@
-DarwinCore_Vocab.json
-LICENSE.txt
+ LICENSE.txt
 MANIFEST.in
 PKG_ID.json
 README.rst
 data/PKG_ID.json
+data/DarwinCore_vocab.json
 obis/__init__.py
 obis/processor.py
 obis.egg-info/PKG-INFO
