@@ -1,3 +1,4 @@
+DarwinCore_Vocab.json
 LICENSE.txt
 MANIFEST.in
 PKG_ID.json
