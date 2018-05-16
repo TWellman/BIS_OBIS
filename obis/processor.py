@@ -1,7 +1,8 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
+
 
 # %load obis_erddap_validate.py
 # !/usr/local/bin/python3
@@ -50,7 +51,8 @@ import yaml
 from fastnumbers import fast_float as float_convert
 
 
-# In[ ]:
+# In[2]:
+
 
 # processing options ( ... most of them anyway)
 
@@ -107,7 +109,8 @@ Options
 """ % (sys.argv[0]))
 
 
-# In[ ]:
+# In[3]:
+
 
 #######################################################################
 ##                          program options                          ##
@@ -471,7 +474,8 @@ def default_inputs():
     return commands
 
 
-# In[ ]:
+# In[4]:
+
 
 
 #######################################################################
@@ -1847,7 +1851,8 @@ def dataframe_metadata(ds, global_metadata, vocab_standard, commands,
         ds[label].attrs = var_meta
 
 
-# In[ ]:
+# In[5]:
+
 
 # brute force (ugly) examination of heterogeneous data types
 # examines each dataframe iterator (chunk)
@@ -1943,7 +1948,8 @@ def data_types(dtype_list, dlist, df, df_labels, commands, err_msg = []):
     return dtype_list
 
 
-# In[ ]:
+# In[6]:
+
 
 # Purpose: csv conversion to NetCDF using (Xarray, Dask) method
 #
@@ -2412,6 +2418,10 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
         return
         
 
+
+# In[ ]:
+
+
 # Purpose: initialize/modify default input parameters
 # accepts either commandline options or *yaml file
 #
@@ -2525,13 +2535,16 @@ def arg_overwrite(opts, args, commands):
                 commands['create_netcdf_files'] = False
                 commands['create_datasets_xml'] = True
             elif o in '--help':
-                !usage()
+                get_ipython().system('usage()')
                 exit(0)
             else:
                 assert False, 'unhandled option'
                 
     return commands
-# In[2]:
+
+
+# In[7]:
+
 
 #
 # routine to create/clean work directories 
@@ -2569,7 +2582,8 @@ def set_directories(commands):
             os.remove(f)
 
 
-# In[ ]:
+# In[8]:
+
 
 #
 # Routine to activate logger function (default output is to file)
@@ -2618,7 +2632,8 @@ def logform(screen, log_level):
     return
 
 
-# In[ ]:
+# In[9]:
+
 
 # setup file paths (per data item)
 # remove outdated files, if relevant
@@ -2659,7 +2674,8 @@ def setup_fpaths(filename, commands, p_tasks = [], err_msg = []):
         
 
 
-# In[ ]:
+# In[10]:
+
 
 
 #######################################################################
@@ -2804,7 +2820,7 @@ if __name__ == "__main__":
         opts, args = getopt.getopt(sys.argv[1:], 'fc', opt_fields)
     except getopt.GetoptError as err:
         logger.error(str(err))
-        get_ipython().system(u'usage(); exit(2) ')
+        get_ipython().system('usage(); exit(2) ')
 
     # retrieve processing commands
     # -----------------------------
