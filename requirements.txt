@@ -12,7 +12,9 @@
 # content: evolving obis-only python package environment
 #
 # python dependencies
-netCDF4
+
+h5py
+netCDF4==1.3.0
 numpy
 pandas
 xarray
@@ -21,3 +23,4 @@ dask
 messytables
 fastnumbers
 -e git+https://code.chs.usgs.gov/sciencebase/pysb.git#egg=pysb
+-e git+https://github.com/TWellman/BIS_OBIS.git#egg=obis
