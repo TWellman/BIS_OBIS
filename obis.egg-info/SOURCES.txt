@@ -2,7 +2,7 @@ LICENSE.txt
 MANIFEST.in
 PKG_ID.json
 README.rst
-data/DarwinCore_vocab_2018-03-13T17-03-40Z.json
+data/PKG_ID.json
 obis/__init__.py
 obis/processor.py
 obis.egg-info/PKG-INFO
