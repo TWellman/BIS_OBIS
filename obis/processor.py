@@ -2412,9 +2412,6 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
         return
         
 
-
-# In[ ]:
-
 # Purpose: initialize/modify default input parameters
 # accepts either commandline options or *yaml file
 #
@@ -2528,15 +2525,13 @@ def arg_overwrite(opts, args, commands):
                 commands['create_netcdf_files'] = False
                 commands['create_datasets_xml'] = True
             elif o in '--help':
-                get_ipython().system(u'usage()')
+                !usage()
                 exit(0)
             else:
                 assert False, 'unhandled option'
                 
     return commands
-
-
-# In[ ]:
+# In[2]:
 
 #
 # routine to create/clean work directories 
@@ -2551,7 +2546,7 @@ def set_directories(commands):
                    'recon_data_dir', 'report_dir', 'tempdir']
     for folder in folder_list:
         if not os.path.isdir(commands[folder]):
-            os.mkdir(commands[folder])
+            os.makedirs(commands[folder])
         else:
             commands[folder] 
             srch = (commands[folder] + '/.*').replace('//','/')
@@ -2559,14 +2554,14 @@ def set_directories(commands):
             for f in files:
                 os.remove(f)
     if not os.path.isdir('./QC_FAIL'):
-            os.mkdir('./QC_FAIL') 
+            os.makedirs('./QC_FAIL') 
     else:
         files = glob.glob('./QC_FAIL/.*')
         for f in files:
             os.remove(f)
     commands['prefilter_dir'] = './prefilter_data'
     if not os.path.isdir(commands['prefilter_dir']):
-        os.mkdir(commands['prefilter_dir'])
+        os.makedirs(commands['prefilter_dir'])
     else:
         srch = (commands['prefilter_dir'] + '/.*').replace('//','/')
         files = glob.glob(srch)
