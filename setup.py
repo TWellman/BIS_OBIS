@@ -33,7 +33,7 @@ setup(
     author='T. Wellman and J. Long',
     maintainer='USGS BCB-Sciencebase Team',
     maintainer_email='bcb@usgs.gov',
-    package_data={'': ['PKG_ID.json']},
+    package_data={'': ['/data/PKG_ID.json','/data/DarwinCore_vocab_2018-03-13T17-03-40Z.json']},
     include_package_data=True,
     zip_safe=True,
     platforms='any',
