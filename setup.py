@@ -12,7 +12,7 @@ with open(fpath, encoding='utf-8') as f:
     long_description = f.read()
 
 # read package build information
-fpath = pkg_resources.resource_filename(__name__, 'PKG_ID.json')
+fpath = pkg_resources.resource_filename(__name__, 'obis/data/PKG_ID.json')
 with open(fpath, encoding='utf-8') as f:
     _pkginfo = json.load(f)
 
