@@ -33,7 +33,8 @@ setup(
     author='T. Wellman and J. Long',
     maintainer='USGS BCB-Sciencebase Team',
     maintainer_email='bcb@usgs.gov',
-    package_data={'': ['data/DarwinCore.json','PKG_ID.json']},
+    packages=find_packages(exclude=['docs', 'misc', 'tests', 'pkg_environments']),
+    package_data={'data': ['data/*']},
     include_package_data=True,
     zip_safe=True,
     platforms='any',
@@ -48,5 +49,4 @@ setup(
         'Topic :: Software Development :: Utilities',
         'Topic :: Software Development :: Libraries :: Python Modules'],
     keywords='BIS biogeography obis processor',
-    packages=find_packages(exclude=['docs', 'misc', 'tests', 'pkg_environments']),
 )
