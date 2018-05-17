@@ -180,7 +180,7 @@ def default_inputs():
     #
     # path + name (Darwin Core Standard) in json file, "None" to bypass
     #
-    darwin_vocab = 'DarwinCore_vocab.json'
+    darwin_vocab = 'data/DarwinCore_vocab.json'
     vocab_name  = 'Darwin Core Standard'
 
 
