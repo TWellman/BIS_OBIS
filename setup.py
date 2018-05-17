@@ -34,7 +34,7 @@ setup(
     maintainer='USGS BCB-Sciencebase Team',
     maintainer_email='bcb@usgs.gov',
     packages=find_packages(exclude=['docs', 'misc', 'tests', 'pkg_environments']),
-    package_data={'': ['PKG_ID.json', 'DarwinCore_vocab_2018-03-13T17-03-40Z.json']},
+    data_files = [('', ['PKG_ID.json', 'DarwinCore_vocab_2018-03-13T17-03-40Z.json'])],
     include_package_data=True,
     zip_safe=True,
     platforms='any',
