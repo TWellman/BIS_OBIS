@@ -17,7 +17,7 @@ with open(fpath, encoding='utf-8') as f:
     _pkginfo = json.load(f)
 
 # read Darwin Core standard vocabulary
-fpath = pkg_resources.resource_filename(__name__, 'DarwinCore_vocab.json')
+fpath = pkg_resources.resource_filename(__name__, 'obis/data/DarwinCore_vocab.json')
 with open(fpath) as f:
     dc_vocab = json.load(f)
 
@@ -32,6 +32,8 @@ setup(
     author='T. Wellman and J. Long',
     maintainer='USGS BCB-Sciencebase Team',
     maintainer_email='bcb@usgs.gov',
+    packages=find_packages(exclude=['docs', 'misc', 'tests', 'pkg_environments']),
+    package_data={'': ['license.txt','PKG_ID.json','DarwinCore_vocab.json']},
     include_package_data=True,
     zip_safe=True,
     platforms='any',

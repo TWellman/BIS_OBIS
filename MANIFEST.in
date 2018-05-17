@@ -1,3 +1,3 @@
-# Include the license file
+# files to include
 include LICENSE.txt
-recursive-include data/*
+recursive-include data *

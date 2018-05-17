@@ -1,0 +1,31 @@
+# Content: evolving OBIS-only BIS Python package environment
+# Purpose: OBIS processing and partial ERDDAP config
+# Author: T. Wellman, BCB group, USGS
+#
+# Create or update Conda Python environment
+#
+# create environment:   a) type: conda env create --file obis_environment.yml
+#
+# update environment:   a) type: source activate bis_python_obis
+#                       b) type: conda env update --file obis_environment.yml
+#
+# note: to update existing environment rename "bis_python_obis" to your environment name
+#
+name: bis_python_obis
+dependencies:
+- python>=3.5
+- anaconda
+# file storage
+- netCDF4
+# dataprocessing
+- numpy
+- pandas
+- xarray
+# misc.
+- pyyaml
+- dask
+- pip
+- pip:
+  - "git+https://code.chs.usgs.gov/sciencebase/pysb.git"
+  - messytables
+  - fastnumbers

@@ -1,0 +1,24 @@
+# Content: evolving OBIS-only BIS Python package dependencies
+# Purpose: OBIS processing and partial ERDDAP config
+# Author: T. Wellman, BCB group, USGS and John Long, ScienceBase Team, USGS
+#
+# note: << draft version >> requirements.txt file for pip controlled installation
+#
+# Pip based package installation or package updating
+# step 1: cd to requirements.txt directory
+# step 2: activate or create virtualenv (https://docs.python.org/3/tutorial/venv.html)
+# step 3: type: pip install --upgrade -r /path/to/requirements.txt
+#
+# content: evolving obis-only python package environment
+#
+# python dependencies
+python>=3.5
+netCDF4
+numpy
+pandas
+xarray
+pyyaml
+dask
+messytables
+fastnumbers
+-e git+https://code.chs.usgs.gov/sciencebase/pysb.git#egg=pysb

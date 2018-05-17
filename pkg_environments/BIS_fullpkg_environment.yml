@@ -1,0 +1,75 @@
+# Content: complete (in progress) BIS Python package environment
+# Purpose: BIS processing, visualization, and analytics
+# Author: T. Wellman, BCB group, USGS
+#
+# Create or update Conda Python environment
+#
+# create environment:   a) type: conda env create --file BIS_fullpkg_environment.yml
+#
+# update environment:   a) type: source activate bis_python_complete
+#                       b) type: conda env update --file BIS_fullpkg_environment.yml
+#
+name: bis_python_complete
+channels:
+  - conda-forge
+dependencies:
+- python>=3.5
+- anaconda
+# github api
+- pygithub
+# database
+- elasticsearch
+- mongodb
+- postgresql
+- redis
+- sqlalchemy
+- ipython-sql
+# web framwork
+- flask
+- twisted
+- gunicorn
+- flask-script
+- flask-sqlalchemy
+- flask-security
+- flask-rest-jsonapi
+- flask-restful
+- flask-restless
+- flask-testing
+- flask-uploads
+- flask-user
+# visualization
+- bokeh
+- python-nvd3
+- Matplotlib
+- seaborn
+- gensim
+# web gui
+- tk
+- wxpython
+# file storage
+- netCDF4
+- hdf5
+# dataprocessing
+- numpy
+- pandas
+- scipy
+- scikit-learn
+- xarray
+- gdal
+# unit conventions, partial cf compliancy
+- udunits2
+- conda-forge/label/broken udunits2
+# code testing
+- coverage
+# web scraping
+- scrapy
+- beautifulsoup4
+# misc.
+- fastnumbers
+- pyyaml
+- dask
+- pip
+- pip:
+  - "git+https://code.chs.usgs.gov/sciencebase/pysb.git"
+  - messytables
+  - Flask-PyMongo
