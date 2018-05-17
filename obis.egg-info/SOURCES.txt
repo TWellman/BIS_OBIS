@@ -1,5 +1,4 @@
 DarwinCore_vocab.json
-DarwinCore_vocab_2018-03-13T17-03-40Z.json
 LICENSE.txt
 MANIFEST.in
 PKG_ID.json
