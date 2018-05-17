@@ -1,4 +1,3 @@
 # Include the license file
 include LICENSE.txt
-include PKG_ID.json
-include DarwinCore_vocab.json
+include *.json

@@ -32,7 +32,7 @@ setup(
     author='T. Wellman and J. Long',
     maintainer='USGS BCB-Sciencebase Team',
     maintainer_email='bcb@usgs.gov',
-    packages=find_packages(exclude=['docs', 'misc', 'tests', 'pkg_environments']),
+    include_package_data=True,
     zip_safe=True,
     platforms='any',
     classifiers=[
