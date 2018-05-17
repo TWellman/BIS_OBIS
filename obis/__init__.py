@@ -6,7 +6,7 @@ from os import path
 fpath = path.abspath(path.dirname(__file__))
 
 # initialize package version, content info, and revision uuid
-with open(path.join(fpath, 'PKG_ID.json')) as vf:
+with open(path.join(fpath, '/data/PKG_ID.json')) as vf:
     _pkginfo = json.load(vf)
 __version__ = _pkginfo['version']
 __content__ = _pkginfo['content']
