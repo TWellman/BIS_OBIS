@@ -235,7 +235,7 @@ def default_inputs():
     #
     # flag whether to delete regenerated csv file from netCDF, after testing 
     #
-    dump_csv = True
+    dump_csv = False
 
     #
     # flag whether to output comparison report file (if compare_csv2csv = True)
