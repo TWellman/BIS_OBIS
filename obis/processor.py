@@ -3,6 +3,7 @@
 
 # In[14]:
 
+
 # %load obis_erddap_validate.py
 # !/usr/local/bin/python3
 # Framework: a processing component of the Biogeographic Information System (BIS)
@@ -52,6 +53,7 @@ from fastnumbers import fast_float as float_convert
 
 
 # In[2]:
+
 
 # processing options ( ... most of them anyway)
 
@@ -109,6 +111,7 @@ Options
 
 
 # In[15]:
+
 
 #######################################################################
 ##                          program options                          ##
@@ -235,7 +238,7 @@ def default_inputs():
     #
     # flag whether to delete regenerated csv file from netCDF, after testing 
     #
-    dump_csv = False
+    dump_csv = True
 
     #
     # flag whether to output comparison report file (if compare_csv2csv = True)
@@ -472,6 +475,7 @@ def default_inputs():
 
 
 # In[4]:
+
 
 
 #######################################################################
@@ -1849,6 +1853,7 @@ def dataframe_metadata(ds, global_metadata, vocab_standard, commands,
 
 # In[5]:
 
+
 # brute force (ugly) examination of heterogeneous data types
 # examines each dataframe iterator (chunk)
 # resolves conflicts between interpreted data chunks
@@ -1944,6 +1949,7 @@ def data_types(dtype_list, dlist, df, df_labels, commands, err_msg = []):
 
 
 # In[6]:
+
 
 # Purpose: csv conversion to NetCDF using (Xarray, Dask) method
 #
@@ -2415,6 +2421,7 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
 
 # In[ ]:
 
+
 # Purpose: initialize/modify default input parameters
 # accepts either commandline options or *yaml file
 #
@@ -2424,7 +2431,7 @@ def arg_overwrite(opts, args, commands):
     # optional default overwrite - *.yaml config. file  - T. Wellman
     # -------------------------------------------------
 
-    if '.yml' in args or '.yaml' in args:        
+    if any(y in arg for arg in args for y in ['.yml', '.yaml']):
         if 'yaml' in sys.modules:
             with open(args[0], 'r') as options:
                 try:
@@ -2528,7 +2535,7 @@ def arg_overwrite(opts, args, commands):
                 commands['create_netcdf_files'] = False
                 commands['create_datasets_xml'] = True
             elif o in '--help':
-                get_ipython().system(u'usage()')
+                get_ipython().system('usage()')
                 exit(0)
             else:
                 assert False, 'unhandled option'
@@ -2537,6 +2544,7 @@ def arg_overwrite(opts, args, commands):
 
 
 # In[7]:
+
 
 #
 # routine to create/clean work directories 
@@ -2575,6 +2583,7 @@ def set_directories(commands):
 
 
 # In[8]:
+
 
 #
 # Routine to activate logger function (default output is to file)
@@ -2625,6 +2634,7 @@ def logform(screen, log_level):
 
 # In[9]:
 
+
 # setup file paths (per data item)
 # remove outdated files, if relevant
 # -----------------------------------
@@ -2665,6 +2675,7 @@ def setup_fpaths(filename, commands, p_tasks = [], err_msg = []):
 
 
 # In[10]:
+
 
 
 #######################################################################
@@ -2809,7 +2820,7 @@ if __name__ == "__main__":
         opts, args = getopt.getopt(sys.argv[1:], 'fc', opt_fields)
     except getopt.GetoptError as err:
         logger.error(str(err))
-        get_ipython().system(u'usage(); exit(2) ')
+        get_ipython().system('usage(); exit(2) ')
 
     # retrieve processing commands
     # -----------------------------
