@@ -1,0 +1,105 @@
+LLAT_specs:
+  altitude:
+    destinationName: altitude
+    positive: up
+    units: m
+  depth:
+    destinationName: depth
+    positive: down
+    units: m
+  eventDate:
+    destinationName: time
+  latitude:
+    destinationName: latitude
+    units: degrees_north
+  longitude:
+    destinationName: longitude
+    units: degrees_east
+absent_string: NA
+cf_comply: false
+chunk_elements: 5000000.0
+collection_id: 57fe93d5e4b0824b2d14cbe1
+compare_csv2csv: true
+convert_chars: !!python/object/apply:collections.OrderedDict
+- - - '
+
+      '
+    - ''
+  - - ',n/a,'
+    - ',NA,'
+  - - ',none,'
+    - ',NA,'
+  - - ',na,'
+    - ',NA,'
+convert_method: dataframe
+create_datasets_xml: true
+create_netcdf_files: true
+create_virtual_datasets: false
+darwin_vocab: data/DarwinCore_vocab.json
+date_convert: string
+date_fmt: '%Y-%m-%dT%H:%M:%SZ'
+dump_csv: true
+erddap_data_dir: ./erddap_data/nc_store
+error_report: true
+fetch_csvs: true
+fetch_metadata: true
+file_overwrite: false
+file_srch:
+  ftype_req:
+  - .csv
+  - .zip
+  name:
+  - occurrence
+  - event
+  - measurementOrFact
+  title:
+  - DarwinCore:event
+  - DarwinCore:occurrence
+  - DarwinCore:measurementOrFact
+  - final processed source
+  - Final Processed File
+fname_ext: _redo_
+int_float_accept: false
+log_level: 10
+log_screen: true
+max_report: 50
+netcdf_type: NETCDF4_CLASSIC
+numeric_terms:
+- _meters
+- minimum_
+- maximum_
+- _minimum_
+- _maximum
+- decimal
+- in_meters
+postfilter: false
+prefilter: false
+proc_limit: false
+proc_overwrite: false
+q_fmt:
+- '"'
+- '"{}"'
+- ''''
+qoute_format: '[\,](?=(?:[^"]*"[^"]*")*[^"]*$)'
+quote_style: 2
+recon_data_dir: ./erddap_data/nc_store/recreate_files
+report_dir: ./erddap_data/nc_store/processing_reports
+rows_per_file: 0
+sample_size: 0
+server_nc_directory: ./erddap_data/nc_store
+source_data_dir: ./source_data_test
+string_fmt: UTF-8
+string_terms:
+- _id,
+- _code
+table_output: false
+tempdir: ./erddap_data/nc_store/test/
+variable_units:
+  WeightsN: N
+  inKg: kg
+  in_meters: m
+  inmeters: m
+verbose: false
+vocab_name: Darwin Core Standard
+window: 500
+workdir: null
