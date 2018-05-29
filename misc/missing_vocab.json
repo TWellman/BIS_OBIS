@@ -1,0 +1,2389 @@
+{
+    "VerbatimObservationDateTime": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "HABITAT_CD": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "timeUncertainty": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "collection_code": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SubSampleID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SamplingProtocol": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "event_date_time_zone": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "surveyEventID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Biovolume_cubic_micrometers_per_mL_": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "quantification_name": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IndividualID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LEN": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationDeterminedDate": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "latitude": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "survey_event_id": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LAT_DEGREES": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "eventDateTimeZone": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "geodetic_datum": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "maxDepth": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "InfraspecificEpithet": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "idenfication_remarks": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "time_uncertainty": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SUBREGION_NR": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationUncertainty": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "quantification_determined_date": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "MaterialSampleID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservationDateTimeZone": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "type_status": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Order": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "sampling_effort": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "GeoreferenceProtocol": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "obisusa_internal_id": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "MPA_NR": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VerbatimModified": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "rugosity": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "OccurrenceRemarks": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservationHeight": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "OriginatorResourceUrlLabel": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LIFE_STAGE": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationMethod": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ScientificNameID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationName": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "observation_time": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationUnit": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "taxa_order": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "time": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationVocabulary": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "OP_ID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LPISamplingWeightsN": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "DataProvider": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Phylum": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "REGION": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "PI": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "individual_id": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "WaterTemperatureInCelsius": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VerbatimEventDate": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "OriginatorResourceURL": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SPECIES_NR": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "DateIdentified": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "minDepth": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "management": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Date": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VernacularNameCategory": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SCI_NAME": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "RecordedBy": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "DAY": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "scientificNameOriginal": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservationDateTimeAnnotation": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "source": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "taxa_family": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Depth_m_": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LocationComments": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Time": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "region": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "maximum_elevation_in_meters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "sampling_protocol": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "StationNumber": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "TypeStatus": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IdentifiedBy": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "stratumDepth": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "quantification_value": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Municipality": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "higher_institution_code": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Family": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "TaxonRank": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationValue": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IdentificationComments": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Synonyms": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Depth": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "platform_vlts": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "MinimumElevationInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SubsampleID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "EventDate": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "scientific_name_id": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "NUM": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "sighting_cue": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "island_group": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ZONE_NR": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Equipment": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "verbatim_modified_date": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "basis_of_record": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "scientific_name_authorship": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "event_date_remarks": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SampleLengthInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "EventID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IdentificationDate": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IslandGroup": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "OriginatorResourceUrlTitle": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "maximum_depth_in_meters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "MONTH": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "state_province": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "footprintwkt": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "TypeVLTS": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservationTimeZone": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ScientificNameAuthors": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "event_date": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Class": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "samplingConditions": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "BearingToAnimals": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SamplingEffort": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ScientificName": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "DEPTH": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "altitude": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "coordinate_uncertainty_in_meters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "N": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "quantification_status": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObisUsaInternalID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Data": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "longitude": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "catalog_number": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Preparations": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "beaufort_sea_state": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LON_DEGREES": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Reliability": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "acceptedname": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LPI_cells_sampledN": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Behavior": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SPECIES_CD": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "TimeUncertainty": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "BasisOfRecord": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "quantification_unit": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Locality": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "AphiaID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "aggregator": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "station_code": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "OriginatorResourceUrl": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "taxa_kingdom": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LocationRemarks": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LifeStage": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "occurrence_remarks": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ScientificNameAuthorship": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Repository": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservedMinLengthInCm": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservationDateTime": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "verbatim_coordinates": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "NominalObservationDateTime": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SampleVolumeInCubicMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "scientific_name": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservationTime": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LIFE_STAGE_NAME": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "measurementValueID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "surveyIndex": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "quantification_determined_by": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "MAPGRID_NR": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "CollectionCode": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "TrackSequenceNumber": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "COMMON_NAME": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Source": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "species_cd": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "weight_in_kg": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Sex": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Vessel": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Label": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "InstitutionCode": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "sampling_conditions": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "measurementMethodID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "X": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Longitude": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Kingdom": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "acceptedID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "vernacular_name": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LengthType": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VisibilityImpairment": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VesselActivity": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "EventDateRemarks": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "weightInKg": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SpecificEpithet": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Latitude": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "UNDERWATER_VISIBILITY": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "date": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "taxon_rank": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SurveyEventID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SampleWidthInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IntraspecificEpithet": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "material_sample_id": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LF_N": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "PIAffiliation": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "water_body": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "subRegion": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "CatalogNumber": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IdentificationRemarks": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservedMaxLengthInCm": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VerbatimCoordinateSystem": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SPECIES": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "WaterBody": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VernacularName": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "higherInstitutionCode": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "MaximumElevationInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "survey_year": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "geodeticdatum": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Island": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Habitat": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "survey_date": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SightingDistanceInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "DatasetID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "taxa_class": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "TIME_SEEN": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SurveyID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "identification_qualifier": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "owner_institution_code": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "EventDateTimeZone": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "HigherInstitutionCode": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "TSN": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "RecordType": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservationDate": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "GeoreferencedBy": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "verbatim_depth": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ReceiverID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObserversCounts": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "WindDirectionRelativeToTrueNorth": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "name": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VerbatimSRS": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Genus": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SampleRadiusInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Reticles": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "GeodeticDatum": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SamplingConditions": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "georeference_protocol": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "minimum_depth_in_meters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "specific_epithet": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "scientificNameVerbatim": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "bibliographiccitation": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "originator_resource_url_identifier": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationDeterminedBy": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "life_stage": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "georeferenced_by": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "PlatformVLTS": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "DistanceEstimationMethod": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VisibilityInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "LocationAccuracy": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "County": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "verbatim_event_date": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "measurementUnitID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "marine": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "verbatim_scientificname": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SampleID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "bearing_to_animals": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservationLocation": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "associated_sequences": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "OriginatorResourceUrlIdentifier": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "CoordinateUncertaintyInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "BeaufortSeaState": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "quantificationStatus": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Cell_Volume_cubic_micrometers_per_cell_": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "institution_code": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "STATION_NR": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "infraspecific_epithet": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "depth": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Density_cells_per_mL_": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VehicleName": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "sighting_distance_in_meters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "individual_count": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VerticalAngle": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "equipment": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SampleHeightInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VerticalDatum": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationType": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "FootprintWKT": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "AssociatedSequences": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "TrackHomeRecord": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "BottomType": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "identification_remarks": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IdentificationQualifier": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Phylum_or_Class": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "brackish": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "PRIMARY_SAMPLE_UNIT": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "STRAT": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "MaximumDepthInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "taxa_phylum": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "MinimumDepthInMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VerbatimCoordinates": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "datasetname": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "DynamicProperties": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "PlatformSpeed": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "structureType": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "benthic_taxa": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "wind_speed_in_knots": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "measurementTypeID": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "modified_date": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "PROT": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "dataset_id": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Species": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "the_geom": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "minimum_elevation_in_meters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Altitude": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "NominalObservationDateTimeUncertainty": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "OwnerInstitutionCode": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "QuantificationStatus": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SightingCue": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "OnEffort": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "survey_index": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "YEAR": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IndividualCount": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "TotalInSample": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Modified": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "recorded_by": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "WeightInKg": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "observation_location": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "identified_by": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "WindSpeedInKnots": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "StateProvince": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "quantification_vocabulary": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Aggregator": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "study_area": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "date_identified": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservedMeanLengthInCm": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SampleAreaInSquareMeters": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "taxonomic_authority": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Country": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "AssociatedMetadata": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Subgenus": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "wind_direction_relative_to_true_north": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "n_cells_stratum": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "IndividualIdentifyingFeature": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "PositionVLTS": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "id": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "Taxonomic_Identification": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "VisibilityType": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "WEIGHT": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "ObservedIndividualLengthInCm": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    },
+    "SampleShape": {
+        "Class:": "",
+        "Comment:": "",
+        "Definition:": "",
+        "Details:": "",
+        "Identifier:": ""
+    }
+}
