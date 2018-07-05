@@ -9,14 +9,14 @@
 # update environment:   a) type: source activate bis_python_obis
 #                       b) type: conda env update --file obis_environment.yml
 #
-# note: to update existing environment rename "bis_python_obis" to your environment name
+# note: to update existing environment rename "bis_python_obis" to environment name
 #
 name: bis_python_obis
 dependencies:
 - python>=3.5
 - anaconda
 # file storage
-- netCDF4
+- netCDF4==1.3.0
 # dataprocessing
 - numpy
 - pandas
@@ -29,3 +29,5 @@ dependencies:
   - "git+https://code.chs.usgs.gov/sciencebase/pysb.git"
   - messytables
   - fastnumbers
+  - sparqlwrapper
+  - beautifulsoup4
