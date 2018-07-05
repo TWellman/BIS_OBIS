@@ -13,7 +13,7 @@
 #
 # python dependencies
 python>=3.5
-netCDF4
+netCDF4==1.3.0
 numpy
 pandas
 xarray
@@ -21,4 +21,6 @@ pyyaml
 dask
 messytables
 fastnumbers
+sparqlwrapper
+beautifulsoup4
 -e git+https://code.chs.usgs.gov/sciencebase/pysb.git#egg=pysb

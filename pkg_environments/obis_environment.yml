@@ -16,7 +16,7 @@ dependencies:
 - python>=3.5
 - anaconda
 # file storage
-- netCDF4
+- netCDF4==1.3.0
 # dataprocessing
 - numpy
 - pandas
@@ -29,3 +29,5 @@ dependencies:
   - "git+https://code.chs.usgs.gov/sciencebase/pysb.git"
   - messytables
   - fastnumbers
+  - sparqlwrapper
+  - beautifulsoup4
