@@ -586,7 +586,7 @@ def default_inputs():
     #
     # folder with netCDF files (converted from source csv)
     #
-    erddap_data_dir = './erddap_data/nc_test' # nc_store'
+    erddap_data_dir = './erddap_data/nc_store'
 
     #
     # folder to store error and other report files 
@@ -670,7 +670,7 @@ logform(True, logging.DEBUG)
 
 if __name__ == "__main__":
     
-    opt_fields = ['erddapdir=', 'proc_overwrite', 'report_dir=']
+    opt_fields = ['erddap_data_dir=', 'proc_overwrite', 'report_dir=']
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'fc', opt_fields)
