@@ -156,17 +156,17 @@ def default_inputs():
     #
     # folder with original (source) csv files
     #
-    source_data_dir = './source_data_test'
+    source_data_dir = './source_data'
 
     #
     # folder with netCDF files (converted from source csv)
     #
-    erddap_data_dir = './erddap_data/nc_test' # nc_store'
+    erddap_data_dir = './erddap_data/nc_store'
 
     #
     # Relative path to the netCDF files on the destination server, for the datasets.xml file.
     #
-    server_nc_directory = './erddap_data/nc_test' # nc_store'nc_store'
+    server_nc_directory = './erddap_data/nc_store'
 
     #
     # folder with regenerated csv files (converted from netCDF)
