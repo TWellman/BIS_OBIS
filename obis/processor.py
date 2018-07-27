@@ -2010,11 +2010,11 @@ def data_types(dtype_list, dlist, df, df_labels, commands, err_msg = []):
                 char_max = df[df_labels[j]].dropna().map(len).max()
                 dtype_list[j].append(char_max)
             elif dtype_list[j][1] == 'int':
-                if commands['netcdf_type'] == 'NETCDF3_CLASSIC':
-                    if df[df_labels[j]].dropna().max() > 2147483647:
-                        df[df_labels[j]] = df[df_labels[j]].astype('str')
-                        char_max = df[df_labels[j]].dropna().map(len).max()
-                        dtype_list[j] = [numpy.dtype('O'), 'object', '', char_max]
+                #if commands['netcdf_type'] == 'NETCDF3_CLASSIC':
+                if df[df_labels[j]].dropna().max() > 2147483647:
+                    df[df_labels[j]] = df[df_labels[j]].astype('str')
+                    char_max = df[df_labels[j]].dropna().map(len).max()
+                    dtype_list[j] = [numpy.dtype('O'), 'object', '', char_max]
     else:
         dtype_list2 = []
         for j, d in enumerate(dlist):
