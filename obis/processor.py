@@ -1,7 +1,12 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[ ]:
+
+
+
+
+# In[ ]:
 
 # %load obis_erddap_validate.py
 # !/usr/local/bin/python3
@@ -30,7 +35,6 @@ import xml.etree.ElementTree  as ET
 import json
 import numpy
 import netCDF4
-import netCDF4 as netCDF
 import messytables
 import csv
 import os
@@ -59,7 +63,7 @@ except ImportError:
     from bs4 import BeautifulSoup, Comment
 
 
-# In[2]:
+# In[ ]:
 
 # processing options ( ... most of them anyway)
 
@@ -116,7 +120,7 @@ Options
 """ % (sys.argv[0]))
 
 
-# In[3]:
+# In[ ]:
 
 #######################################################################
 ##                          program options                          ##
@@ -137,12 +141,10 @@ def default_inputs():
     #
     # Dictionary of ScienceBase search terms - use list format only, not case sensitive 
     #
-    file_srch = dict([('title', ['DarwinCore:event','DarwinCore:occurrence',
-                                'DarwinCore:measurementOrFact','final processed source',
-                                'Final Processed File']),
-                      ('name', ['occurrence', 'event', 'measurementOrFact'])])
-    file_srch['ftype_req'] = ['.csv', '.zip']
-
+    file_srch = collections.OrderedDict([('title', ['DarwinCore:event','DarwinCore:occurrence',
+                                                    'DarwinCore:measurementOrFact','final processed source','Final Processed File']),
+                                         ('name', ['occurrence', 'event', 'measurementorfact']),
+                                         ('ftype_req', ['.csv', '.zip'])])
 
     #--------------------------------
     # Folder directories
@@ -156,38 +158,48 @@ def default_inputs():
     #
     # folder with original (source) csv files
     #
-    source_data_dir = './source_data'
+    source_data_dir = './source_data_test'
 
     #
     # folder with netCDF files (converted from source csv)
     #
-    erddap_data_dir = './erddap_data/nc_store'
+    erddap_data_dir = './erddap_data/nc_test'
 
     #
-    # Relative path to the netCDF files on the destination server, for the datasets.xml file.
+    # directory path to the netCDF files on the destination server, for the datasets.xml file.
     #
-    server_nc_directory = './erddap_data/nc_store'
+    server_nc_directory = '/data/local/erddap/data' # '/Users/twellman/erddap_data/nc_test'  
 
     #
     # folder with regenerated csv files (converted from netCDF)
     #
-    recon_data_dir = erddap_data_dir + '/recreate_files'
+    recon_data_dir = os.path.join(erddap_data_dir, 'recreate_files')
 
     #
     # folder to store error and other report files 
     #
-    report_dir = erddap_data_dir + '/processing_reports'
+    report_dir = os.path.join(erddap_data_dir, 'processing_reports') 
 
     #
     # folder to store temporary files when data chunking active (dataframe option)
     #
-    tempdir = erddap_data_dir + '/test/'
+    tempdir = os.path.join(erddap_data_dir, 'test/') 
+    
+    #
+    # folder to store data files that did not pass inspection
+    #
+    qc_fail = os.path.join(erddap_data_dir, 'qc_fail/') 
     
     #
     # path + name (vocabulary standard) in json file, "None" to bypass
     #
     vocab = pkg_resources.resource_filename(__name__, 'data/vocab_standards.json')
     vocab_name  = 'vocabulary standard'
+    
+    #
+    # flag to overwrite local vocabulary file using tdwg.org Darwin Core and ESIP SPARQL endpoint
+    #
+    vocab_overwrite = True
     
     #--------------------------------
     # Processing method (options)
@@ -243,7 +255,7 @@ def default_inputs():
     #
     # flag whether to delete regenerated csv file from netCDF, after testing 
     #
-    dump_csv = True
+    dump_csv = False
 
     #
     # flag whether to output comparison report file (if compare_csv2csv = True)
@@ -299,9 +311,9 @@ def default_inputs():
     #
     # force convert (date) variables to datetime objects 
     # 'datetime': iso datetime variable, 'string': iso string date, "integer": days since 1-1-1970 basedate, 
-    # otherwise : do not convert)
+    # None : do not convert)
     #
-    date_convert = 'string' # 'datetime'
+    date_convert = 'datetime' # 'string' # 
     
     #
     # date format when forced to change (date_convert = True)
@@ -311,7 +323,7 @@ def default_inputs():
     #
     # file processing chunk size (number of elements, "None" deactivates chunking) 
     #
-    chunk_elements = 5e6
+    chunk_elements = 1e7
     
     #
     # attempt CF compliancy standards
@@ -402,18 +414,18 @@ def default_inputs():
     # Dictionary of ERDDAP reserved variables (L.L.A.T) specifications
     #
     LLAT_specs = dict([
-         ('longitude',{'destinationName':'longitude', 'units':'degrees_east'}),
-         ('latitude',{'destinationName':'latitude', 'units':'degrees_north'}),
+         ('decimallongitude',{'destinationName':'longitude', 'units':'degrees_east'}),
+         ('decimallatitude',{'destinationName':'latitude', 'units':'degrees_north'}),
          ('altitude',{'destinationName':'altitude', 'units':'m', 'positive': 'up'}),
          ('depth', {'destinationName':'depth', 'units':'m', 'positive': 'down'}),
-         ('eventDate',{'destinationName':'time'})  
+         # ('eventdate',{'destinationName':'time'})  
      ])
     
     #
     # Search terms used on variable names, data type must be numeric or string 
     # (adhoc fuzzy logic, customize as needed)
     #
-    numeric_terms = ['_meters', 'minimum_', 'maximum_', '_minimum_', '_maximum', 'decimal', 'in_meters']
+    numeric_terms = ['_meters', 'minimum_', 'maximum_', '_minimum_', '_maximum', 'decimal', 'in_meters', 'inmeters']
     string_terms =  ['_id,', '_code']
     
     #
@@ -437,8 +449,10 @@ def default_inputs():
     ('recon_data_dir', recon_data_dir), 
     ('report_dir', report_dir), 
     ('tempdir', tempdir), 
+    ('qc_fail', qc_fail),                           
     ('vocab', vocab),
-    ('vocab_name', vocab_name),                
+    ('vocab_name', vocab_name),  
+    ('vocab_overwrite', vocab_overwrite),
     ('convert_method', convert_method), 
     ('fetch_metadata', fetch_metadata), 
     ('fetch_csvs', fetch_csvs), 
@@ -483,7 +497,7 @@ def default_inputs():
     return commands
 
 
-# In[4]:
+# In[ ]:
 
 
 #######################################################################
@@ -514,7 +528,9 @@ def retrieve_source_files(sb, commands):
         sources = {}
         listdir = [f for f in os.listdir(commands['source_data_dir']) if f.endswith('.csv')]
         for dfile in listdir:
-            logger.debug("{}{}".format( dfile,' from different request'))
+            logger.debug("{}{}".format( dfile,' from different request - ignoring file'))
+            listdir.remove(dfile)
+            
         return listdir, sources
             
 
@@ -548,6 +564,7 @@ def retrieve_source_files(sb, commands):
     
     while results and 'items' in results:
         for item in results['items']:
+            item['dftype'] = {}
             item_flag = False
             if 'files' in item:
                 for item_file in item['files']:
@@ -558,17 +575,24 @@ def retrieve_source_files(sb, commands):
                             fname = item_file[key]
                             if fname:
                                 fname = fname.lower()
-                                if key == 'name':
-                                    if any(t in fname for t in terms):
-                                        if any(s in fname for s in file_srch['ftype_req']):
-                                            pass_flag = True
-                                elif any(t in fname for t in terms):
-                                    pass_flag = True
+                                dftype = [t for t in terms if t in fname]
+                                tag = item_file['name'].split('.')[0] 
+                                if tag not in item['dftype']:
+                                    if key == 'name':
+                                        if dftype:
+                                            if any(s in fname for s in file_srch['ftype_req']):
+                                                pass_flag = True
+                                                item['dftype'][tag] = dftype[0] + ' data'
+                                    elif dftype:
+                                        pass_flag = True             
+                                        item['dftype'][tag] = dftype[0] + ' data'
+          
                     if pass_flag:
                         item_flag = True
                         counter['scibase_size_mb'] += item_file['size']
                         counter['candidate files'] += 1
                         logger.debug('   {} {}'.format(counter['candidate files'], item_file['name']))
+
                         if '.zip' not in item_file['name']:
                             src_file = item_file['name']
                         else:
@@ -632,11 +656,13 @@ def retrieve_source_files(sb, commands):
                                     else:
                                         logger.debug('warning - unzip attempt failed, structure was not recognized')
                                         no_item.append("\t{}{}".format('Unzip attempt failed for item: ', item['id']))
+                                        
+                            
          
                         elif fetch_metadata:
                             if os.path.join(commands['source_data_dir'], src_file):
                                 source_files[item_file['name']] = item
-             
+
             if item_flag == False:
                 no_item.append("\t{}{}".format('no applicable files found in item: ', item['id']))                                
         results = sb.next(results)
@@ -656,14 +682,16 @@ def retrieve_source_files(sb, commands):
         logger.info("   Sciencebase search summary: {}  {}".format(k,v))
         
     listdir = [f for f in os.listdir(commands['source_data_dir']) if f.endswith('.csv')]
+    listdir_final = listdir.copy()
     for source in source_files:
         if source not in listdir:
             logger.debug("{}{}{}".format('warning - ', source,' file from request is not in source file directory'))
     for dfile in listdir:
         if dfile not in source_files:
-            logger.debug("{}{}".format(dfile,' from different request'))
-
-    return listdir, source_files
+            logger.debug("{}{}".format(dfile,' from different request - ignoring file'))
+            listdir_final.remove(dfile)
+    
+    return listdir_final, source_files
 
 
 # Purpose: filters out specified characters, whitespaces, double qoutes, etc
@@ -713,6 +741,7 @@ def combine_netcdfs(paths, chunk, dim, transform_func=None):
 # # T. Wellman, BCB Group, USGS 
 #
 # Assumes csv file is well formed (within Pandas dataframe capabilities)
+
 #
 def regenerate_csv(fpaths, commands, err_msg = [], p_tasks = []):
     
@@ -726,75 +755,85 @@ def regenerate_csv(fpaths, commands, err_msg = [], p_tasks = []):
                 commands['chunksize'] = max(int(commands['chunk_elements']/100), 1)
             else:
                 commands['chunksize'] = False
-        if commands['chunksize']:
-            ds = xr.open_dataset(fpaths['ncpath'], chunks=commands['chunksize'], decode_times=False)
-            ds = ds.chunk(chunks=commands['chunksize'], name_prefix='xarray-', token=None, lock=True)
-        else:
-            ds = xr.open_dataset(fpaths['ncpath'], chunks=commands['chunksize'], decode_times=False)
-        for k in ds.dims:
-            nrows = ds.dims[k]
-            if nrows > 0:
-                break
-            else:
-                return
-        if commands['chunksize']:
-            ndiv = int(numpy.ceil(nrows/commands['chunksize']))
-            csize = commands['chunksize']
-        else:
-            ndiv = 1
-            csize = nrows 
-            
-
-        # convert netcdf to csv using dataframe
-        # ---------------------------------------
-        try:
-            os.remove(fpaths['rconpath'])
-        except:
-            pass
+                
         
-        if ndiv == 1:
-            
-            logger.debug("\t{}".format('Reconstructed source file from NetCDF in one read'))
-            
-            with open(fpaths['rconpath'], 'a') as csvfile:
-                df = ds.to_dataframe()         
-                df.columns = df.columns.str.strip()
-                df.columns = df.columns.str.replace(r"[/]", '_per_')
-                df.columns = df.columns.str.replace(r"[^A-Za-z0-9]+", '_')
-                df.to_csv(csvfile, columns=list(df.columns.values), index=False,
-                          quotechar=commands['q_fmt'][0],
-                          quoting=commands['quote_style'],
-                          encoding = commands['string_fmt'])
-        else:
-            
-            logger.debug("\t{}{}".format('Reconstructed source file from NetCDF in chunks: ', ndiv))
-            
-            f = True
-            with open(fpaths['rconpath'], 'a') as csvfile:
-                for n in numpy.arange(0, ndiv):
-                    if f:
-                        dslice = ds.sel(index=slice(n*csize, (n+1)*csize-1))
-                        df = dslice.to_dataframe()
+        with xr.open_dataset(fpaths['ncpath']) as ds:
+        
+            # data chunking increments 
+            ds = ds.chunk(chunks=commands['chunksize'], name_prefix='xarray-', token=None, lock=True)
+            nrows = ds.dims['index']
+            if commands['chunksize']:
+                ndiv = int(numpy.ceil(nrows/commands['chunksize']))
+                csize = min(nrows, commands['chunksize'])
+            else:
+                ndiv = 1
+                csize = nrows
+
+            # convert netcdf to csv using dataframe
+            # ---------------------------------------
+            try:
+                os.remove(fpaths['rconpath'])
+            except:
+                pass
+
+            if ndiv == 1:
+
+                logger.debug("\t{}".format('Reconstructed source file from NetCDF in one read'))
+
+                with open(fpaths['rconpath'], 'w') as csvfile:
+                    df = ds.to_dataframe()  
+                    df.columns = df.columns.str.strip()
+                    df.columns = df.columns.str.replace(r"[^A-Za-z0-9]+", '_')
+                    df.to_csv(csvfile, columns=list(df.columns.values), index=False,
+                              quotechar=commands['q_fmt'][0],
+                              quoting=commands['quote_style'],
+                              encoding = commands['string_fmt'])       
+            else:
+
+                logger.debug("\t{}{}".format('Reconstructed source file from NetCDF in chunks: ', ndiv))
+                var_labels = [key for key in ds.variables.keys() if key != 'index']
+                max_row = 0; min_row = 0
+                with open(fpaths['rconpath'], mode = 'a') as csvfile: 
+                    for n in numpy.arange(0,ndiv):
+                        if n == ndiv-1:
+                            min_row = max_row
+                            csize = nrows - max_row
+                            max_row = nrows 
+                        else:
+                            min_row = max_row
+                            max_row += csize
+                            
+                        # build numpy array
+                        column = 0
+                        data_array = numpy.empty([csize,len(ds.variables)-1], dtype=object)
+                        for label in ds.variables:
+                            if label != 'index':
+                                darray = ds.variables[label].values[min_row : max_row]
+                                if len(darray.shape) > 2:
+                                    try:
+                                        darray = ["".join(val) for val in darray]
+                                    except:
+                                        darray = [b"".join(val) for val in darray]
+                                    data_array[:,column] = darray 
+                                else:
+                                    data_array[:,column] = darray
+                                column +=1
+
+                        # write to dataframe
+                        df = pd.DataFrame(data_array, columns=var_labels)
                         df.columns = df.columns.str.strip()
-                        df.columns = df.columns.str.replace(r"[/]", '_per_')
                         df.columns = df.columns.str.replace(r"[^A-Za-z0-9]+", '_')
-                        df.to_csv(csvfile, columns=list(df.columns.values),
-                                  encoding=commands['string_fmt'], index=False,
-                                  quoting=commands['quote_style'], 
-                                  quotechar=commands['q_fmt'][0])
-                        f = False
-                        
-                    else:
-                        dslice = ds.sel(index=slice(n*csize, (n+1)*csize-1))
-                        df = dslice.to_dataframe()                                                    
-                        df.to_csv(csvfile, header=False, index=False,
-                                  encoding=commands['string_fmt'],
-                                  quotechar=commands['q_fmt'][0],
-                                  quoting=commands['quote_style'])
-        ds.close()
+                        if n == 0:
+                            df.to_csv(csvfile, columns=list(df.columns.values), 
+                                      encoding=commands['string_fmt'], index=False,
+                                      quoting=commands['quote_style'], quotechar=commands['q_fmt'][0])
+                        else:
+                            df.to_csv(csvfile, columns=list(df.columns.values), mode = 'a',
+                                      encoding=commands['string_fmt'], index=False, header=False,
+                                      quoting=commands['quote_style'], quotechar=commands['q_fmt'][0]) 
+
         p_tasks.append('reconstructed csv')
         return
-
     
 
 # Purpose: lazily compares two csv files line-by-line 
@@ -1180,7 +1219,7 @@ def csv_to_nc_messy(file_name, source_data_dir, metadata, commands):
         file_exists = len(glob.glob(os.path.join(commands['erddap_data_dir'], base_name + '*.nc'))) > 0
 
         if not commands['proc_overwrite'] and file_exists:
-            print('Not writing netCDF for %s, already exists' % (full_file_name))
+            logger.debug('Not writing netCDF for %s, already exists' % (full_file_name))
             return
         (row_set, types, fh) = process_csv(full_file_name, extension, commands['window'])
         try:
@@ -1422,6 +1461,7 @@ def nc_type(orig_type):
     elif isinstance(orig_type, messytables.types.BoolType):
         ret = 'S1'
     return ret
+
     
 #
 # print_object
@@ -1440,23 +1480,36 @@ def print_object(o):
 #
 # Write the datasets.xml file for the given netCDF files.
 #
-def write_datasets_xml(commands, config_dir):
+def write_datasets_xml(commands, config_dir, sources, listdir):
+    
     logger.info('{}'.format('** Writing Datasets.xml file for ERDDAP'))
     datasets_xml_root = create_datasets_xml_root()
     processed = []
     r = re.compile(r'^(.*)_part\d+$')
-    for file_name in glob.glob(os.path.join(commands['erddap_data_dir'], '*.nc')):
-        base_name, extension = os.path.splitext(os.path.basename(file_name))
-        m = re.match(r, base_name)
-        if commands['create_virtual_datasets'] and m:
-            dataset_name = m.group(1)
-        else:
-            dataset_name = base_name
-        if dataset_name not in processed:
-            logger.debug('{}{}'.format('   writing in dataset ', dataset_name))
-            add_dataset(datasets_xml_root, dataset_name, file_name, commands['server_nc_directory'], 
-                        commands['create_virtual_datasets'])
-            processed.append(dataset_name)
+    
+    #for file_name in glob.glob(os.path.join(commands['erddap_data_dir'], '*.nc')):
+    filedir = [os.path.join(commands['erddap_data_dir'], fp).replace('.csv','.nc') for fp in listdir]
+    for file_name in filedir :
+        if os.path.isfile(file_name):
+            base_name, extension = os.path.splitext(os.path.basename(file_name))
+            m = re.match(r, base_name)
+            if commands['create_virtual_datasets'] and m:
+                dataset_name = m.group(1)
+            else:
+                dataset_name = base_name
+            if dataset_name not in processed:
+                logger.debug('{}{}'.format('   writing in dataset ', dataset_name))
+
+                # retrieve ScienceBase metadata T. Wellman
+                if base_name + '.csv' in sources:
+                    item_metadata = sources[base_name + '.csv']
+                else:
+                    item_metadata = {}
+
+                add_dataset(datasets_xml_root, dataset_name, file_name, commands['server_nc_directory'], 
+                            commands['create_virtual_datasets'], item_metadata, commands['LLAT_specs'])
+
+                processed.append(dataset_name)
 
     xmlstr = minidom.parseString(ET.tostring(datasets_xml_root)).toprettyxml(indent="   ", encoding="UTF-8")
     with open(os.path.join(config_dir, "datasets.xml") , "wb") as f:
@@ -1496,13 +1549,13 @@ def create_datasets_xml_root():
 #
 # Add a dataset to the datasets.xml
 #
-def add_dataset(root, dataset_name, file_name, server_nc_directory, create_virtual_datasets):
+def add_dataset(root, dataset_name, file_name, server_nc_directory, create_virtual_datasets, metadata, LLAT_specs):
     #
     # Root elements
     #
     dataset = ET.SubElement(root, 'dataset', attrib={'type': 'EDDTableFromMultidimNcFiles', 'datasetID': dataset_name, 'active': 'true'})
     reloadEveryNMinutes = ET.SubElement(dataset, 'reloadEveryNMinutes')
-    reloadEveryNMinutes.text = '10080'
+    reloadEveryNMinutes.text = '1440'
     updateEveryNMillis = ET.SubElement(dataset, 'updateEveryNMillis')
     updateEveryNMillis.text = '10000'
     fileDir = ET.SubElement(dataset, 'fileDir')
@@ -1533,74 +1586,121 @@ def add_dataset(root, dataset_name, file_name, server_nc_directory, create_virtu
     #
     # Get global attributes from netCDF
     #
-    nc_file = netCDF4.Dataset(file_name, 'r')
-    nc_attrs = nc_file.ncattrs()
-    #
-    # Top level attributes
-    #
-    addAttributes = ET.SubElement(dataset, 'addAttributes')
-    cdm_data_type = ET.SubElement(addAttributes, 'att', attrib={'name': 'cdm_data_type'})
-    cdm_data_type.text = 'Other'
-    Conventions = ET.SubElement(addAttributes, 'att', attrib={'name': 'Conventions'})
-    Conventions.text = 'COARDS, CF-1.6, ACDD-1.3'
-    infoUrl = ET.SubElement(addAttributes, 'att', attrib={'name': 'infoUrl'})
-    if 'infourl' in nc_attrs:
-        infoUrl.text = nc_file.getncattr('infourl')
-    else:
-        infoUrl.text = "Local source"
-    institution = ET.SubElement(addAttributes, 'att', attrib={'name': 'institution'})
-    institution.text = 'US Geological Survey'
-    keywords = ET.SubElement(addAttributes, 'att', attrib={'name': 'keywords'})
-    # Set the keywords text once the variable names are known
-    dataset_license = ET.SubElement(addAttributes, 'att', attrib={'name': 'license'})
-    dataset_license.text = 'This USGS product is considered to be in the U.S. public domain'
-    sourceUrl = ET.SubElement(addAttributes, 'att', attrib={'name': 'sourceUrl'})
-    if 'infourl' in nc_attrs:
-        sourceUrl.text = nc_file.getncattr('infourl')
-    else:
-        sourceUrl.text = 'Local source'
-    standard_name_vocabulary = ET.SubElement(addAttributes, 'att', attrib={'name': 'standard_name_vocabulary'})
-    standard_name_vocabulary.text = 'CF Standard Name Table v29'
-    #subsetVariables = ET.SubElement(addAttributes, 'att', attrib={'name': 'subsetVariables'})
-    # Set the keywords text once the variable names are known
-    summary = ET.SubElement(addAttributes, 'att', attrib={'name': 'summary'})
-    if 'summary' in nc_attrs:
-        summary.text = nc_file.getncattr('summary')
-    else:
-        summary.text = 'No summary info available'
-    title = ET.SubElement(addAttributes, 'att', attrib={'name': 'title'})
-    if 'title' in nc_attrs:
-        title.text = nc_file.getncattr('title')
-    else:
-        title.text = 'Data from a local source'
+    with netCDF4.Dataset(file_name, 'r+') as nc_file:
+        nc_attrs = nc_file.ncattrs()
+        #
+        # Top level attributes
+        #
+        addAttributes = ET.SubElement(dataset, 'addAttributes')
+        cdm_data_type = ET.SubElement(addAttributes, 'att', attrib={'name': 'cdm_data_type'})
+        cdm_data_type.text = 'Other'
+        Conventions = ET.SubElement(addAttributes, 'att', attrib={'name': 'Conventions'})
+        Conventions.text = 'COARDS, CF-1.6, ACDD-1.3'
+        infoUrl = ET.SubElement(addAttributes, 'att', attrib={'name': 'infoUrl'})
+        if 'infourl' in nc_attrs:
+            infoUrl.text = nc_file.getncattr('infourl')
+        elif 'link' in metadata and 'url' in metadata['link']:
+            infoUrl.text = metadata['link']['url']
+        else:
+            infoUrl.text = 'Local source'
+        institution = ET.SubElement(addAttributes, 'att', attrib={'name': 'institution'})
+        institution.text = 'US Geological Survey'
+        keywords = ET.SubElement(addAttributes, 'att', attrib={'name': 'keywords'})
+        # Set the keywords text once the variable names are known
+        dataset_license = ET.SubElement(addAttributes, 'att', attrib={'name': 'license'})
+        dataset_license.text = 'This USGS product is considered to be in the U.S. public domain'
+        sourceUrl = ET.SubElement(addAttributes, 'att', attrib={'name': 'sourceUrl'})
+        if 'sourceurl' in nc_attrs:
+            sourceUrl.text = nc_file.getncattr('sourceurl')
+        else:
+            sourceUrl.text = 'http://data.usgs.gov/erddap'     
+        standard_name_vocabulary = ET.SubElement(addAttributes, 'att', attrib={'name': 'standard_name_vocabulary'})
+        standard_name_vocabulary.text = 'CF Standard Name Table v29'
+        #subsetVariables = ET.SubElement(addAttributes, 'att', attrib={'name': 'subsetVariables'})
+        # Set the keywords text once the variable names are known
+        summary = ET.SubElement(addAttributes, 'att', attrib={'name': 'summary'})
+        if 'summary' in nc_attrs:
+            summary.text = nc_file.getncattr('summary')
+        else:
+            summary.text = 'No summary info available'
+        title = ET.SubElement(addAttributes, 'att', attrib={'name': 'title'})
 
-    #
-    # Variables
-    #
-    var_names = []
-    altitude_and_depth = 'altitude' in nc_file.variables and 'depth' in nc_file.variables
+        if 'title' in nc_attrs:
+            if 'dftype' in metadata:
+                base = os.path.basename(file_name).split('.')[0]
+                if base in metadata['dftype']: 
+                    if metadata['dftype'][base] not in nc_file.getncattr('title'):
+                        title.text = nc_file.getncattr('title') + ' ' + metadata['dftype'][base]
+                    else:
+                        title.text = nc_file.getncattr('title') 
+            else:
+                title.text = nc_file.getncattr('title')
 
-    for nc_var in nc_file.variables:
-        var_name = str(nc_var)
-        dataVariable = ET.SubElement(dataset, 'dataVariable')
-        sourceName = ET.SubElement(dataVariable, 'sourceName')
-        sourceName.text = var_name
-        destinationName = ET.SubElement(dataVariable, 'destinationName')
-        # Special case: ERDDAP is strict about variables named "time""
+        # Tristan  - added other global attributes, all of the attribute code (above) should probably  
+        # be synthesized into one loop structure like this in the future.
+        for key in ['processor', 'content', 'citation', ]:
+            if key in nc_attrs:
+                variable_att = ET.SubElement(addAttributes, 'att', attrib={'name': key})
+                variable_att.text = str(nc_file.getncattr(key))
+
+        #
+        # Variables
+        #
+        
+        # Tristan  - evaluate whether depth, altitude variables are both present, prioritize depth 
         # Special case: ERDDAP does not allow a dataset to contain both "altitude" and "depth"
-        if (var_name == 'time') or (altitude_and_depth and var_name in ['altitude', 'depth']):
-            var_name = 'source_' + var_name
-        destinationName.text = var_name
-        dataType = ET.SubElement(dataVariable, 'dataType')
-        dataType.text = erddap_datatype(nc_file.variables[nc_var].datatype)
-        add_field_attrs(dataVariable, nc_var)
-        var_names.append(var_name)
+        var_names = []
+        altvar = None; depthvar = None
+        for llat in LLAT_specs:
+            if LLAT_specs[llat]['destinationName'] == 'altitude':
+                altvar = llat
+            elif LLAT_specs[llat]['destinationName'] == 'depth':
+                depthvar == llat
+        if altvar is None or depthvar is None:
+            altvar = None
+            depthvar = None
+            
 
-    # Now we can set keywords and subsetVariables
-    keywords.text = ','.join(var_names)
-    #subsetVariables.text = ",".join(var_names)
+        for nc_var in nc_file.variables:
+            var_name = str(nc_var)
+            var_orig = var_name
+            dataVariable = ET.SubElement(dataset, 'dataVariable')
+            sourceName = ET.SubElement(dataVariable, 'sourceName')
+            sourceName.text = var_name
+            destinationName = ET.SubElement(dataVariable, 'destinationName')
+            
+            # Tristan - determine if variable is designated ERDDAP LLAT variable (commands[LLAT_specs])
+            # Special case: ERDDAP is strict about variables named "time""
+            # Special case: ERDDAP does not allow a dataset to contain both "altitude" and "depth"
+            # if variable is a designated LLAT name, but is not in LLAT_specs in commands dic, 
+            # a "Renamed_" tag will be appended to avoid the conflict
+            if var_name.lower() in LLAT_specs:
+                if var_name.lower() == altvar:
+                    var_name = 'source_' + var_name
+                destinationName.text = LLAT_specs[var_name.lower()]['destinationName']
+            else:
+                if var_name in ['latitude', 'longitude', 'depth', 'altitude', 'time']:
+                    var_name = 'source_' + var_name 
+                destinationName.text = var_name 
+            
+            dataType = ET.SubElement(dataVariable, 'dataType')
+            dataType.text = erddap_datatype(nc_file.variables[nc_var].datatype)
+
+            # add auxillary netcdf variable attribute information - Tristan
+            nc_aux_attr = {}
+            for nattr in nc_file.variables[var_orig].ncattrs():
+                entry = str(nc_file.variables[var_orig].getncattr(nattr))
+                entry  = entry .replace("'","").replace('"',"")
+                nc_aux_attr[nattr] = entry
+
+            add_field_attrs(dataVariable, nc_var, nc_aux_attr)
+            var_names.append(var_name)
+
+        # Now we can set keywords and subsetVariables
+        keywords.text = ','.join(var_names)
+        #subsetVariables.text = ",".join(var_names)
     
-    nc_file.close()
+    # nc_file.close()
 
 #
 # add_field_attrs
@@ -1609,7 +1709,7 @@ def add_dataset(root, dataset_name, file_name, server_nc_directory, create_virtu
 #
 # Add the appropriate attributes for the given variable.
 #
-def add_field_attrs(dataVariable, nc_var):
+def add_field_attrs(dataVariable, nc_var, nc_aux_attr):
     addAttributes = ET.SubElement(dataVariable, 'addAttributes')
 
     var_name = str(nc_var)
@@ -1628,17 +1728,22 @@ def add_field_attrs(dataVariable, nc_var):
         elif var_name.lower() in ['altitude', 'depth']:
             units = 'm'
         standard_name = var_name.lower()
-
+    else:
+        for key in nc_aux_attr:
+            variable_att = ET.SubElement(addAttributes, 'att', attrib={'name': key})
+            variable_att.text = str(nc_aux_attr[key])
+        
     ioos_category_att = ET.SubElement(addAttributes, 'att', attrib={'name': 'ioos_category'})
     ioos_category_att.text = ioos_category
-    long_name_att = ET.SubElement(addAttributes, 'att', attrib={'name': 'long_name'})
-    long_name_att.text = var_name.replace('_', ' ').title()
+    #long_name_att = ET.SubElement(addAttributes, 'att', attrib={'name': 'long_name'})
+    #long_name_att.text = var_name.replace('_', ' ').title()
+    #if units:
+    #    units_att = ET.SubElement(addAttributes, 'att', attrib={'name': 'units'})
+    #    units_att.text = units
     if standard_name:
         standard_name_att = ET.SubElement(addAttributes, 'att', attrib={'name': 'standard_name'})
         standard_name_att.text = standard_name
-    if units:
-        units_att = ET.SubElement(addAttributes, 'att', attrib={'name': 'units'})
-        units_att.text = units
+        
 
 #
 # get_ioos_category
@@ -1762,8 +1867,15 @@ def meta_proc(filename, metadata = {}):
     fmt = '{}\n{}'
     attrs['content'] = fmt.format('OBIS-USA marine biological data consisting of recorded observations', 
                         'of identifiable marine species at a known time and place.')
+    
     if 'title' in metadata:
-        attrs['title'] = metadata['title']
+        if 'dftype' in metadata:
+            base = os.path.basename(filename).split('.')[0] 
+            if base in metadata['dftype']: 
+                if metadata['dftype'][base] not in metadata['title']:
+                    attrs['title'] = metadata['title'] + ' ' + metadata['dftype'][base]
+        else:
+            attrs['title'] = metadata['title']
     else:
         attrs['title'] = 'Title not yet available'
     if 'body' in metadata:
@@ -1816,34 +1928,40 @@ def dataframe_metadata(ds, global_metadata, vocab_standard, commands,
     var_nconform = 0
     for label in df_labels:
         var_meta = collections.OrderedDict()
-        if label in commands['LLAT_specs']:
+        if label.lower() in commands['LLAT_specs']:
             var_meta['long_name'] = label.title()
-            for key, value in commands['LLAT_specs'][label].items():
+            for key, value in commands['LLAT_specs'][label.lower()].items():
                 if key != 'destinationName':
                     var_meta[key] = value
-                if 'time' in value.lower():
+                if 'time' in value.lower() and commands['date_convert']:
                     if commands['date_convert'].lower() == 'integer':
                         var_meta['units'] = 'days since 1970-01-01'
                     elif commands['date_convert'].lower() == 'datetime':
                         var_meta['units'] = 'datetime64[ns]'
                     else:
-                        var_meta['units'] = 'datetime (unknown fmt)'               
+                        var_meta['units'] = 'datetime (unspecified)'               
         else:
             var_meta['long_name'] = label
+            var_unit = [value for key,value in commands['variable_units'].items() 
+                            if key.lower() in label.lower()]
             if 'dtype' not in nc_dtypes[label]:
-                var_meta['units'] = 'undefined'
+                if var_unit:
+                        var_meta['units'] = var_unit[0]
+                else:
+                    var_meta['units'] = 'undefined' 
             elif 'S' not in nc_dtypes[label]['dtype'] and 'U' not in nc_dtypes[label]['dtype']: 
-                    for key,value in commands['variable_units'].items():
-                        if key.lower() in label.lower():
-                            var_meta['units'] = value
-                    if '_date' in label:
-                        var_meta['units'] = 'datetime (unknown fmt)'    
+                if var_unit:
+                    var_meta['units'] = var_unit[0]
+                else:
+                    var_meta['units'] = 'undefined'
+                    if '_date' in label.lower() or 'Date' in label:
+                        var_meta['units'] = 'datetime (unspecified)'    
                     else:
-                        var_meta['units'] = 'unknown' 
+                        var_meta['units'] = 'unspecified' 
             else:
                 var_meta['_Encoding'] = commands['string_fmt']
-                if any(d in label.lower() for d in ['_date', '_time']):
-                    var_meta['units'] = 'datetime (unknown)' 
+                if any(d in label.lower() for d in ['_date', '_time']) or 'Date' in label:
+                    var_meta['units'] = 'datetime (unspecified)' 
                 
         for key, value in ds[label].attrs.items():
                 var_meta[key] = value
@@ -1855,14 +1973,14 @@ def dataframe_metadata(ds, global_metadata, vocab_standard, commands,
                     var_meta[key.lower()] = entry 
             else:
                 var_nconform +=1
-                var_meta['comment'] = 'non-conforming to ' +  vocab_name
-                msg = '\n{}{}{}{}'.format('WARNING: - variable: ',label,', non-conforming to ', vocab_name)
+                var_meta['comment'] = 'could not identify verbatim match to ' +  vocab_name
+                msg = '\n{}{}{}{}'.format('WARNING: - variable: ',label,', requires match to ', vocab_name)
                 err_msg.append(msg)
 
         ds[label].attrs = var_meta
 
 
-# In[5]:
+# In[ ]:
 
 # brute force (ugly) examination of heterogeneous data types
 # examines each dataframe iterator (chunk)
@@ -1958,7 +2076,7 @@ def data_types(dtype_list, dlist, df, df_labels, commands, err_msg = []):
     return dtype_list
 
 
-# In[6]:
+# In[ ]:
 
 # Purpose: csv conversion to NetCDF using (Xarray, Dask) method
 #
@@ -2130,7 +2248,7 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                 # ---------------------------------------------
             
                 df.columns = df.columns.str.strip()
-                df.columns = df.columns.str.replace(r"[/]", '_per_')
+                #df.columns = df.columns.str.replace(r"[/]", '_per_')
                 df.columns = df.columns.str.replace(r"[^A-Za-z0-9]+", '_')                      
                 df_labels = df.columns.tolist()
                 dlist = df.dtypes.tolist() 
@@ -2220,7 +2338,7 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                                                                  
                 # remove special characters from variable names 
                 df.columns = df.columns.str.strip()
-                df.columns = df.columns.str.replace(r"[/]", '_per_')
+                #df.columns = df.columns.str.replace(r"[/]", '_per_')
                 df.columns = df.columns.str.replace(r"[^A-Za-z0-9]+", '_')
                 
                 if columns == bulk_stat['columns']:
@@ -2233,7 +2351,7 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                             elif commands['absent_string']:
                                 df[col] = df[col].fillna(commands['absent_string']) 
                                 
-                            # LLAT variables show unexpected type, attempt coerced conversion   
+                            # LLAT position variables show unexpected type, attempt coerced conversion   
                             if df_labels[i] in posvar:
                                 for key, value in commands['LLAT_specs'][df_labels[i]].items():
                                     if key == 'destinationName' and value != 'time':
@@ -2252,20 +2370,9 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                                             nc_dtypes[col]['dtype'] = 'float64'
                                         except:
                                             pass
-                       
-                           # variable is expected numeric, attempt conversion
-                            elif df_labels[i] in quantvar: 
-                                msg = '\n{}{}{}'.format('WARNING: - variable: ', df_labels[i], ' read as string, forcing conversion to numeric' )
-                                err_msg.append(msg)
-                                try:
-                                    entry_ok = df[col].notnull()
-                                    df.loc[entry_ok, col] = pd.to_numeric(df[col][entry_ok], errors='coerce')
-                                    nc_dtypes[col]['dtype'] = 'float64'
-                                except:
-                                    pass
                             
-                            # variable is a datetime record
-                            elif col in timevar:
+                            # LLAT time variable should be datetime record, attempt conversion
+                            elif col in timevar and commands['date_convert']:
                                 
                                 # attempt to process time variable as utc datetime
                                 if commands['date_convert'].lower() == 'datetime':
@@ -2293,7 +2400,18 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                                         df[col] = df[col].astype(int)
                                         nc_dtypes[col] = {'dtype' : 'int'}
                                     except ValueError:
-                                        pass          
+                                        pass  
+                                    
+                            # variable should be numeric, attempt conversion
+                            elif df_labels[i] in quantvar: 
+                                msg = '\n{}{}{}'.format('WARNING: - variable: ', df_labels[i], ' read as string, forcing conversion to numeric' )
+                                err_msg.append(msg)
+                                try:
+                                    entry_ok = df[col].notnull()
+                                    df.loc[entry_ok, col] = pd.to_numeric(df[col][entry_ok], errors='coerce')
+                                    nc_dtypes[col]['dtype'] = 'float64'
+                                except:
+                                    pass
                                     
                             else:
                                 # re-encode dtype so specified string length is honored
@@ -2339,7 +2457,7 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                     fnt+=1
                     chunkfile = fpaths['tempdir'] + 'netcdf_chunk_' + str(fnt) + '.nc'
                     ds = ds.chunk(chunks=commands['chunksize'], name_prefix='xarray-', 
-                                  token=None, lock=True)
+                                  token=None, lock=True)  
                     ds.to_netcdf(chunkfile, mode = 'w', 
                                  format = commands['netcdf_type'], encoding = nc_dtypes)
                     paths.append(chunkfile)
@@ -2347,7 +2465,7 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                     
             
             # if chunked, attempt to re-assemble via Dask processing through Xarray
-            # optionally, attempt to enforce Climate-Forceast compliancy (may fail)
+            # optionally, attempt to enforce Climate-Forceast compliancy (compliancy may fail)
             # ------------------------------------------------------------------
             
             if commands['chunksize']: 
@@ -2358,42 +2476,40 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                 
                     if commands['cf_comply']:
                         try:
-                            ds = xr.open_mfdataset(paths, decode_cf= decodeCF, concat_dim='index')
+                            ds = xr.open_mfdataset(paths, decode_cf= True, concat_dim='index')
                             ds = ds.chunk(chunks=commands['chunksize'], name_prefix='xarray-', 
                                           token=None, lock=True)
                             dataframe_metadata(ds, metadata, vocab, commands, err_msg, 
                                                df_labels, nc_dtypes, commands['vocab_name'])
                             ds.to_netcdf(fpaths['ncpath'], mode = 'w',
                                          format = commands['netcdf_type']) 
-                            ds.close()
                         except:
                             decodeCF = False    
                             
                         if not decodeCF:
                             try:
-                                ds = xr.open_mfdataset(paths, decode_cf= decodeCF, concat_dim='index') 
+                                ds = xr.open_mfdataset(paths, concat_dim='index') 
                                 ds = ds.chunk(chunks=commands['chunksize'], name_prefix='xarray-', 
                                               token=None, lock=True)
                                 dataframe_metadata(ds, metadata, vocab, commands, err_msg, 
                                                    df_labels, nc_dtypes, commands['vocab_name'])
                                 ds.to_netcdf(fpaths['ncpath'], mode = 'w', 
                                              format = commands['netcdf_type']) 
-                                ds.close()
                             except:
                                 commands['QC_pass'] = False
                     else:
                         
-                        decodeCF = False
+
                         try:
-                            ds = xr.open_mfdataset(paths, decode_cf= decodeCF, concat_dim='index') 
+                            ds = xr.open_mfdataset(paths, concat_dim='index') 
                             ds = ds.chunk(chunks=commands['chunksize'], name_prefix='xarray-',
                                           token=None, lock=True)
                             dataframe_metadata(ds, metadata, vocab, commands, err_msg, 
                                                df_labels, nc_dtypes, commands['vocab_name'])
                             ds.to_netcdf(fpaths['ncpath'], mode = 'w', format=commands['netcdf_type'])
-                            ds.close()
                         except:
                             commands['QC_pass'] = False
+                    
                     
                     if commands['QC_pass']:
                         logger.debug('\t\t{}{}'.format('climate-Forcast compliancy (Xarray) - SET TO: ', decodeCF))
@@ -2406,23 +2522,25 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
                         
                         if os.path.isfile(fpaths['ncpath']):
                             os.remove(fpaths['ncpath'])
-                        fileQCfail = './QC_FAIL/' + fpaths['sfpath'].split('/')[-1] 
+                        fileQCfail =  os.path.join(commands['qc_fail'], fpaths['sfpath'].split('/')[-1] ) 
                         os.rename(fpaths['sfpath'], fileQCfail) 
                         [os.remove(p) for p in paths]
 
             if not commands['QC_pass']:
-                errmsg = "** QC/PROCESSING FAIL ** - during conversion, sending files to ./QC_FAIL directory"
+                errmsg = "** QC/PROCESSING FAIL ** - during conversion, sending files to QC_FAIL directory"
                 logger.warning("\n\t{}\n".format(errmsg))
                 p_tasks.append(errmsg)
                 dumpfiles = [fpaths['sfpath'], fpaths['ncpath'],fpaths['rconpath']]
                 for orig_file in dumpfiles:
                     if os.path.isfile(orig_file):
-                        mvfile = './QC_FAIL/' + orig_file.split('/')[-1] 
+                        mvfile = os.path.join(commands['qc_fail'], orig_file.split('/')[-1] ) 
                         os.rename(orig_file, mvfile)
             else:
                 logger.debug('\t\t{}'.format('... completed file conversion'))
                 p_tasks.append('processed source csv')
                 p_tasks.append('created netcdf')
+                
+            ds.close()
                 
             return
             
@@ -2432,7 +2550,7 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
         
 
 
-# In[7]:
+# In[ ]:
 
 # Purpose: initialize/modify default input parameters
 # accepts either commandline options or *yaml file
@@ -2555,7 +2673,7 @@ def arg_overwrite(opts, args, commands):
     return commands
 
 
-# In[8]:
+# In[ ]:
 
 #
 # routine to create/clean work directories 
@@ -2566,7 +2684,7 @@ def arg_overwrite(opts, args, commands):
 def set_directories(commands):
     if commands['workdir']:
         os.chdir(commands['workdir'])
-    folder_list = ['source_data_dir', 'erddap_data_dir', 'server_nc_directory',
+    folder_list = ['source_data_dir', 'erddap_data_dir',
                    'recon_data_dir', 'report_dir', 'tempdir']
     for folder in folder_list:
         if not os.path.isdir(commands[folder]):
@@ -2577,10 +2695,10 @@ def set_directories(commands):
             files = glob.glob(srch)
             for f in files:
                 os.remove(f)
-    if not os.path.isdir('./QC_FAIL'):
-            os.makedirs('./QC_FAIL') 
+    if not os.path.isdir(commands['qc_fail']):
+            os.makedirs(commands['qc_fail'])
     else:
-        files = glob.glob('./QC_FAIL/.*')
+        files = glob.glob(commands['qc_fail'] + '/.*')
         for f in files:
             os.remove(f)
     commands['prefilter_dir'] = './prefilter_data'
@@ -2593,7 +2711,7 @@ def set_directories(commands):
             os.remove(f)
 
 
-# In[9]:
+# In[ ]:
 
 #
 # Routine to activate logger function (default output is to file)
@@ -2642,7 +2760,7 @@ def logform(screen, log_level):
     return
 
 
-# In[10]:
+# In[ ]:
 
 # setup file paths (per data item)
 # remove outdated files, if relevant
@@ -2687,7 +2805,7 @@ def setup_fpaths(filename, commands, p_tasks = [], err_msg = []):
         
 
 
-# In[11]:
+# In[ ]:
 
 # Retrieve and process vocabulary standards from
 # Biodiversity Information Standards (TDWG) and ESIP SPARQL endpoint.
@@ -2807,8 +2925,9 @@ def retrieve_vocab():
 
     # from other query results, determine additional vocab terms from ESIP sparql endpoint
     add_terms = len(vocab_terms.keys()) - orig_dic_length 
-    print("\n\t{}{}\n\t{}{}".format('TDWG vocab terms: ', orig_dic_length, 'ESIP vocab terms: ', add_terms))
-    
+    logger.debug("\t{}{}".format('TDWG vocab terms identifed: ', orig_dic_length))
+    logger.debug("\t{}{}".format('ESIP vocab terms identifed: ', add_terms)) 
+                                         
     return DCkey_order, vocab_terms  
 
 
@@ -2879,6 +2998,8 @@ def sparql_query(query_tag, sparql_endpoint):
     return results
 
 
+
+
 # Definition to retrieve and process vocabulary standards from
 # Biodiversity Information Standards (TDWG) and ESIP SPARQL endpoint.
 # Perform match tests using case insensitive matches and fuzzy matches
@@ -2889,7 +3010,7 @@ def sparql_query(query_tag, sparql_endpoint):
 #
 # TDWG vocab match attempts are case sensitive and insensitive (w/o fuzzy)
 
-def eval_vocab(commands):
+def eval_vocab(commands, DCkey_order, vocab_terms):
 
     #
     # vocab search path and parameters
@@ -2898,18 +3019,17 @@ def eval_vocab(commands):
     sparql_endpoint = "http://cor.esipfed.org/sparql" 
     qtypes = ['no_special_chars', 'split_terms']
     msg = 'information from Biodiversity Information Standards (TDWG) and USGS-ESIP SPARQL endpoint'
-                               
+
     #
     # process local NetCDF, determine variable matches where information is missing
     #
-    DCkey_order, vocab_terms = retrieve_vocab()
     vocab_terms_lower = [key.lower() for key in vocab_terms.keys()]
 
     for ncfile in ncfiles:
         
         # proceed when proc_overwrite is active or vocab file is not present in folder
         dcfname = os.path.join(commands['report_dir'], ncfile.split('/')[-1]).rsplit('.nc')[0] + '_variableINFO.json' 
-        if commands['proc_overwrite'] or not os.path.isfile(dcfname):
+        if commands['vocab_overwrite'] or not os.path.isfile(dcfname):
             
             # track missing variable information, match type, and match candidates
             match_types = collections.OrderedDict([('verbatim', 0),
@@ -2924,28 +3044,29 @@ def eval_vocab(commands):
 
             # loop through NetCDF variables, attempt to find missing variable information
             
-            with netCDF4.Dataset(ncfile, 'r+') as ncc:
+            with netCDF4.Dataset(ncfile, 'r+') as nc_file:
+           
         
-                dim_vars = [d for d in ncc.dimensions.keys() if 'string' not in d ]
+                dim_vars = [d for d in nc_file.dimensions.keys() if 'string' not in d ]
 
-                for key in ncc.variables.keys():
+                for key in nc_file.variables.keys():
                     if key not in dim_vars:
 
                         # matches exactly 
                         if key in vocab_terms.keys():
                             srch_dic['match_count']['verbatim'] += 1
                             for sdkey in vocab_terms[key].keys(): 
-                                ncc.variables[key].setncattr(sdkey, vocab_terms[key][sdkey]) 
+                                nc_file.variables[key].setncattr(sdkey, vocab_terms[key][sdkey]) 
                             if 'comment' not in vocab_terms[key].keys():
-                                ncc.variables[key].setncattr('comment', msg)
+                                nc_file.variables[key].setncattr('comment', msg)
 
                         # matches as case insensitive
                         elif key.lower() in vocab_terms_lower:
                             srch_dic['match_count']['ignore_case'] += 1
                             for sdkey in vocab_terms[key.lower()].keys():
-                                ncc.variables[key].setncattr(sdkey, vocab_terms[key.lower()][sdkey]) 
+                                nc_file.variables[key].setncattr(sdkey, vocab_terms[key.lower()][sdkey]) 
                             if 'comment' not in vocab_terms[key.lower()].keys():
-                                ncc.variables[key].setncattr('comment', msg)
+                                nc_file.variables[key].setncattr('comment', msg)
 
                         # attempt term association using low-level fuzzy logic
                         else:
@@ -2970,32 +3091,39 @@ def eval_vocab(commands):
                                 for varkey in DCkey_order:
                                     if varkey in otherkeys:
                                         variable_dic[varkey] = best_results[varkey]['value']
-                                        ncc.variables[key].setncattr(varkey, variable_dic[varkey])
+                                        nc_file.variables[key].setncattr(varkey, variable_dic[varkey])
                                 if 'label' in best_results:
                                     variable_dic['label'] = label 
-                                    ncc.variables[key].setncattr('alias_name', label)
+                                    nc_file.variables[key].setncattr('alias_name', label)
                                 for varkey in otherkeys:
                                     if varkey not in variable_dic:
                                         variable_dic[varkey] = best_results[varkey]['value']
-                                        ncc.variables[key].setncattr(varkey, variable_dic[varkey])
+                                        nc_file.variables[key].setncattr(varkey, variable_dic[varkey])
                                 if 'comment' not in variable_dic.keys():
-                                    ncc.variables[key].setncattr('comment', msg)
+                                    nc_file.variables[key].setncattr('comment', msg)
                                     variable_dic['comment'] = msg
                                 vocab_terms[label] = variable_dic   
                             elif ideal_hits > 1:
                                 srch_dic['match_count']['nonunique'] += 1
                                 srch_dic['possible_matches'][key] = best_results
-                                ncc.variables[key].setncattr('comment', 'Refer to ScienceBase record for explanation') 
+                                nc_file.variables[key].setncattr('comment', 'Refer to ScienceBase record for explanation') 
                             elif ideal_hits == 0:
                                 srch_dic['match_count']['no_match'] += 1
                                 srch_dic['missing_vars'].append(key)
-                                ncc.variables[key].setncattr('comment', 'Refer to ScienceBase record for explanation') 
+                                nc_file.variables[key].setncattr('comment', 'Refer to ScienceBase record for explanation') 
 
                 # output vocabulary match results               
                 with open(dcfname, 'w', encoding = 'utf-8', errors = 'replace') as outfile:
                     json.dump(srch_dic, outfile, indent=4)
-        
-    
+
+                logger.debug("{}{}".format('match type summary, fname: ', ncfile.split('/')[-1]))
+                logger.debug("\t{}{}".format('variables - w/ existing info in file: ', srch_dic['match_count']['verbatim']))
+                logger.debug("\t{}{}".format('found new var match - case insensitive: ', srch_dic['match_count']['ignore_case']))
+                logger.debug("\t{}{}".format('found new var match - unique fuzzy: ', srch_dic['match_count']['fuzzy']))
+                logger.debug("\t{}{}".format('found non-unique fuzzy var matches: ', srch_dic['match_count']['nonunique']))
+                logger.debug("\t{}{}".format('no matches found: ',srch_dic['match_count']['no_match']))
+
+
     # Create combined missing vocabulary file from individual vocab files
     logger.debug('** Writing file of global missing label definitions (missing_vocab.json)')
        
@@ -3019,7 +3147,7 @@ def eval_vocab(commands):
         json.dump(vocab_terms, outfile, indent=4)
 
 
-# In[12]:
+# In[ ]:
 
 
 #######################################################################
@@ -3042,7 +3170,7 @@ def supress_print(func):
     return wrapper
 
 
-@supress_print
+#@supress_print
 def run(**kwargs):
 
     # update commands dictionary, activate logger  
@@ -3064,10 +3192,12 @@ def run(**kwargs):
     # optionally, retrieve files and source metadata (locally, ScienceBase) 
     # ------------------------------------------------------------------
     sb = SbSession()
+    if sb.ping()['result'] != 'OK':
+        logger.debug('ScienceBase cannot be accesseed - terminating program')
+        return
     listdir, sources = retrieve_source_files(sb, commands)
     if commands['proc_limit']:
         listdir = listdir[0:min(len(listdir), commands['proc_limit'])]
-    
                                 
     # optionally retrieve specified vocabulary definitions
     # -------------------------------------------------------
@@ -3077,12 +3207,12 @@ def run(**kwargs):
         vocab = json.load(dc)
     else:
         vocab = []
-        
-        
+
     # process file-by-file 
     # -----------------------
     convert_chars =  {k.lower(): v for k, v in commands['convert_chars'].items()}
     logger.debug("{}".format('** Processing available data files'))
+    
     for k, filename in enumerate(listdir):
         
         # initialize messaging
@@ -3110,7 +3240,6 @@ def run(**kwargs):
                 cmp_metadata = meta_proc(filename, item_metadata)
             else:
                 cmp_metadata = {}
-                
 
             # file conversion (uses "dataframe" or "messytables" approach)
             if commands['convert_method'] == "dataframe":
@@ -3118,7 +3247,7 @@ def run(**kwargs):
                                  vocab, p_tasks, err_msg)
             else: 
                 csv_to_nc_messy(filename, commands['source_data_dir'], 
-                                cmp_metadata, commands) 
+                                cmp_metadata, commands)
   
         
         # 2) optionally evaluate file conversion, w/ filtering + QC reporting 
@@ -3132,6 +3261,10 @@ def run(**kwargs):
 
                 # compare original (source) csv to regenerated csv
                 compare_csv(fpaths, commands, err_msg, p_tasks)
+            
+            else:
+                fileQCfail =  os.path.join(commands['qc_fail'], os.path.basename(fpaths['sfpath'])) 
+                os.rename(fpaths['sfpath'], fileQCfail) 
                 
         
         # 3) output qc/processing tasks (other reporting in step 2):
@@ -3144,19 +3277,20 @@ def run(**kwargs):
     # 4) optionally, evaluate NetCDF variable descriptions, find missing variable metdata, 
     #    use online vocabulary resources to perform verbatim and fuzzy searches
     # ----------------------------------------------------------------------
-    if commands['vocab']:
-         logger.debug('{}'.format("NetCDF metadata check skipped - use 'python -m obis.metadata_check' via command line"))        
-            
+    if commands['vocab'] or commands['vocab_overwrite']:
+        logger.debug('{}'.format("** NetCDF metadata check"))        
+        DCkey_order, vocab_terms = retrieve_vocab()
+        eval_vocab(commands, DCkey_order, vocab_terms) 
             
     # 5) optionally create the ERDDAP datasets.xml file using netCDF files
     # ---------------------------------------------------------------------
     if commands['create_datasets_xml'] :
-        write_datasets_xml(commands, "./")
+        write_datasets_xml(commands, "./", sources, listdir)
         logger.debug('   {}'.format('datasets.xml file created'))
     
     logger.message("{}\n\n".format('** Processor terminated **'))
-
     
+     
 # **** main program ****
 
 
@@ -3186,13 +3320,17 @@ if __name__ == "__main__":
                        
 
 
-# In[13]:
+# In[ ]:
 
-# !ncdump -h '/Users/twellman/erddap_data/nc_test/DryTortugasReefVisualCensus2004_Event.nc'
-# !ncdump -h '/Users/twellman/erddap_data/nc_test/DryTortugasReefVisualCensus2004_measurementOrFact.nc'
+#!ncdump -v 'YEAR'  '/Users/twellman/erddap_data/nc_test/DryTortugasReefVisualCensus2004_Event.nc'
 
 
 # In[ ]:
 
+#!ncdump -h '/Users/twellman/erddap_data/nc_test/DryTortugasReefVisualCensus2004_measurementOrFact.nc'
 
+
+# In[ ]:
+
+#!ncdump -h '/Users/twellman/erddap_data/nc_test/DryTortugasReefVisualCensus2004_occurence.nc'
 
