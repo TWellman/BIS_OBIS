@@ -131,7 +131,7 @@ def default_inputs():
     
     # ScienceBase Item ID - search for data files 
     #--------------------------------------------
-    collection_id = '55f33030e4b0ba2c1a007776' #'57fe93d5e4b0824b2d14cbe1' # '579b64c6e4b0589fa1c98118' 
+    collection_id = '57fe93d5e4b0824b2d14cbe1' # '579b64c6e4b0589fa1c98118' 
     
     #
     # Dictionary of ScienceBase search terms - use list format only, not case sensitive 
@@ -153,7 +153,7 @@ def default_inputs():
     #
     # folder with original (source) csv files
     #
-    source_data_dir = './source_data_test'
+    source_data_dir = './source_data'
 
     #
     # folder with netCDF files (converted from source csv)
