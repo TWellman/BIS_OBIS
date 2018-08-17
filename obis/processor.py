@@ -3,7 +3,6 @@
 
 # In[ ]:
 
-
 # %load obis_erddap_validate.py
 # !/usr/local/bin/python3
 # Framework: a processing component of the Biogeographic Information System (BIS)
@@ -60,7 +59,6 @@ except ImportError:
 
 
 # In[ ]:
-
 
 # processing options ( ... most of them anyway)
 
@@ -119,7 +117,6 @@ Options
 
 # In[ ]:
 
-
 #######################################################################
 ##                          program options                          ##
 #######################################################################
@@ -134,7 +131,7 @@ def default_inputs():
     
     # ScienceBase Item ID - search for data files 
     #--------------------------------------------
-    collection_id = '57fe93d5e4b0824b2d14cbe1' # '579b64c6e4b0589fa1c98118' 
+    collection_id = '55f33030e4b0ba2c1a007776' #'57fe93d5e4b0824b2d14cbe1' # '579b64c6e4b0589fa1c98118' 
     
     #
     # Dictionary of ScienceBase search terms - use list format only, not case sensitive 
@@ -156,7 +153,7 @@ def default_inputs():
     #
     # folder with original (source) csv files
     #
-    source_data_dir = './source_data'
+    source_data_dir = './source_data_test'
 
     #
     # folder with netCDF files (converted from source csv)
@@ -409,7 +406,7 @@ def default_inputs():
     qoute_format = '''[\,](?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)'''
     
     #
-    # Dictionary of ERDDAP reserved variables (L.L.A.T) specifications (in lowercase)
+    # Dictionary of ERDDAP reserved variables (L.L.A.T) specifications (use lowercase keys)
     #
     LLAT_specs = dict([
          ('decimallongitude',{'destinationName':'longitude', 'units':'degrees_east'}),
@@ -496,7 +493,6 @@ def default_inputs():
 
 
 # In[ ]:
-
 
 
 #######################################################################
@@ -1643,18 +1639,23 @@ def add_dataset(root, dataset_name, file_name, server_nc_directory, create_virtu
         
         # Tristan  - evaluate whether depth, altitude variables are both present, prioritize depth 
         # Special case: ERDDAP does not allow a dataset to contain both "altitude" and "depth"
+        
+        spacevar = 0; conflict_vars = []
+        for vocab in ['depth', 'altitude']:
+            for nc_var in nc_file.variables:
+                varname = str(nc_var).lower()
+                if varname in LLAT_specs:
+                    if LLAT_specs[varname]['destinationName'].lower() == vocab:
+                        spacevar +=1 
+                elif str(nc_var) in LLAT_specs:
+                    if LLAT_specs[str(nc_var)]['destinationName'].lower() == vocab:
+                        spacevar +=1 
+                if spacevar > 1:
+                    conflict_vars.append(str(nc_var))    
+        if conflict_vars:
+            logger.info('{}'.format('   resolving variable name conflicts - > 1 depth & altitude variables are present'))
+        
         var_names = []
-        altvar = None; depthvar = None
-        for llat in LLAT_specs:
-            if LLAT_specs[llat]['destinationName'] == 'altitude':
-                altvar = llat
-            elif LLAT_specs[llat]['destinationName'] == 'depth':
-                depthvar == llat
-        if altvar is None or depthvar is None:
-            altvar = None
-            depthvar = None
-            
-
         for nc_var in nc_file.variables:
             var_name = str(nc_var)
             var_orig = var_name
@@ -1666,16 +1667,18 @@ def add_dataset(root, dataset_name, file_name, server_nc_directory, create_virtu
             # Tristan - determine if variable is designated ERDDAP LLAT variable (commands[LLAT_specs])
             # Special case: ERDDAP is strict about variables named "time""
             # Special case: ERDDAP does not allow a dataset to contain both "altitude" and "depth"
-            # if variable is a designated LLAT name, but is not in LLAT_specs in commands dic, 
-            # a "Renamed_" tag will be appended to avoid the conflict
-            if var_name.lower() in LLAT_specs:
-                if var_name.lower() == altvar:
-                    var_name = 'source_' + var_name
-                destinationName.text = LLAT_specs[var_name.lower()]['destinationName']
-            else:
-                if var_name in ['latitude', 'longitude', 'depth', 'altitude', 'time']:
-                    var_name = 'source_' + var_name 
-                destinationName.text = var_name 
+            # if variable is a designated LLAT name but is not in LLAT_specs in commands dic,
+            # or both altitude and depth are present, 
+            # a "source_" tag will be appended to avoid the conflict
+            if str(nc_var) in conflict_vars:
+                var_name = 'source_' + str(nc_var)
+            elif var_name.lower() not in LLAT_specs:
+                if var_name.lower() in ['latitude', 'longitude', 'depth', 'altitude', 'time']:
+                    logger.info('{}'.format('   resolving variable name conflicts - > generic LLAT variable names are present'))
+                    var_name = 'source_' + var_name    
+            elif var_name.lower() in LLAT_specs:
+                var_name = LLAT_specs[var_name.lower()]['destinationName']
+            destinationName.text = var_name
             
             dataType = ET.SubElement(dataVariable, 'dataType')
             dataType.text = erddap_datatype(nc_file.variables[nc_var].datatype)
@@ -1976,7 +1979,6 @@ def dataframe_metadata(ds, global_metadata, vocab_standard, commands,
 
 # In[ ]:
 
-
 # brute force (ugly) examination of heterogeneous data types
 # examines each dataframe iterator (chunk)
 # resolves conflicts between interpreted data chunks
@@ -2072,7 +2074,6 @@ def data_types(dtype_list, dlist, df, df_labels, commands, err_msg = []):
 
 
 # In[ ]:
-
 
 # Purpose: csv conversion to NetCDF using (Xarray, Dask) method
 #
@@ -2570,7 +2571,6 @@ def csv_to_nc_dframe(filename, metadata, fpaths, commands,
 
 # In[ ]:
 
-
 # Purpose: initialize/modify default input parameters
 # accepts either commandline options or *yaml file
 #
@@ -2684,7 +2684,7 @@ def arg_overwrite(opts, args, commands):
                 commands['create_netcdf_files'] = False
                 commands['create_datasets_xml'] = True
             elif o in '--help':
-                get_ipython().system('usage()')
+                get_ipython().system(u'usage()')
                 exit(0)
             else:
                 assert False, 'unhandled option'
@@ -2693,7 +2693,6 @@ def arg_overwrite(opts, args, commands):
 
 
 # In[ ]:
-
 
 #
 # routine to create/clean work directories 
@@ -2732,7 +2731,6 @@ def set_directories(commands):
 
 
 # In[ ]:
-
 
 #
 # Routine to activate logger function (default output is to file)
@@ -2783,7 +2781,6 @@ def logform(screen, log_level):
 
 # In[ ]:
 
-
 # setup file paths (per data item)
 # remove outdated files, if relevant
 # -----------------------------------
@@ -2828,7 +2825,6 @@ def setup_fpaths(filename, commands, p_tasks = [], err_msg = []):
 
 
 # In[ ]:
-
 
 # Retrieve and process vocabulary standards from
 # Biodiversity Information Standards (TDWG) and ESIP SPARQL endpoint.
@@ -3023,7 +3019,7 @@ def sparql_query(query_tag, sparql_endpoint):
 
 
 
-# Definition to retrieve and process vocabulary standards from
+# Retrieve and process vocabulary standards from
 # Biodiversity Information Standards (TDWG) and ESIP SPARQL endpoint.
 # Perform match tests using case insensitive matches and fuzzy matches
 # (removing special chars and split word searches (split on spec. chars).
@@ -3173,7 +3169,6 @@ def eval_vocab(commands, DCkey_order, vocab_terms):
 # In[ ]:
 
 
-
 #######################################################################
 #                      main processing section
 #######################################################################
@@ -3194,7 +3189,7 @@ def supress_print(func):
     return wrapper
 
 
-#@supress_print
+@supress_print
 def run(**kwargs):
 
     # update commands dictionary, activate logger  
@@ -3344,7 +3339,7 @@ if __name__ == "__main__":
         opts, args = getopt.getopt(sys.argv[1:], 'fc', opt_fields)
     except getopt.GetoptError as err:
         logger.error(str(err))
-        get_ipython().system('usage(); exit(2) ')
+        get_ipython().system(u'usage(); exit(2) ')
     
     # retrieve processing commands
     # -----------------------------
@@ -3357,12 +3352,10 @@ if __name__ == "__main__":
 
 # In[ ]:
 
-
 #!ncdump -h  '/Users/twellman/erddap_data/nc_test/DryTortugasReefVisualCensus2004_Event.nc'
 
 
 # In[ ]:
 
-
-#!ncdump -h '/Users/twellman/erddap_data/nc_test/BOEMAlaska_2008_FishCatch_final_20161227.nc'
+#!ncdump -h '/Users/twellman/erddap_data/nc_test/NOAA_CoralReefMonitoring_LPIPercentCover_event.nc'
 
