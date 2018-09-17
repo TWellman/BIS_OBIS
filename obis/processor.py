@@ -158,7 +158,7 @@ def default_inputs():
     #
     # folder with netCDF files (converted from source csv)
     #
-    erddap_data_dir = './erddap_data/'
+    erddap_data_dir = './erddap_data/data_files/'
 
     #
     # directory path to the netCDF files on the destination server, for the datasets.xml file.
